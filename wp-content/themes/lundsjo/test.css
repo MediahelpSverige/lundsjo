@@ -1,0 +1,601 @@
+html{
+  height: 100%;
+}
+  body {
+   font-family: 'EB Garamond', serif;
+   font-weight: 300;
+    height: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+
+
+h1,h2,h3,h4{
+  font-family: 'Quicksand', sans-serif;
+  vertical-align: super;
+}
+
+
+
+.child{
+  display: none;
+}
+.title{
+  font-family: 'Quicksand', sans-serif;
+
+}
+
+.logo h4 span{
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+
+
+
+.page-wrap {
+    width: 100%;
+    height: 100%;
+    background-image: url('/design3/img/page-bak.jpg');
+    background-size: cover;
+    margin-bottom: 90px;
+}
+
+
+.side{
+  height: 100%;
+  background-color: rgba(144, 144, 144, 0.5);
+}
+
+.side-wrap{
+  margin: auto;
+}
+
+.side-wrap-top{
+      padding: 20px 0px;
+    padding-left: 10px;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 1px 1px 0px rgba(154, 154, 154, 0.4);
+  background-color: rgba(210, 210, 210, 0.5);
+}
+
+.logo {
+    padding-top: 0px;
+}
+
+.logo a{
+  color: black;
+}
+
+.logo a:hover{
+  color: black;
+  text-decoration: none;
+}
+
+.logo h2{
+  font-weight: 700;
+  margin: 0px;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 200px;
+}
+
+.side-wrap-bottom{
+  width: 100%;
+  overflow: auto;
+}
+
+.row.site-content{
+  margin-top: 50px;
+}
+
+nav.side-menu {
+    padding: 5px;
+    margin-top: 60px;
+}
+
+.side-menu h2{
+  margin-top: 0px;
+}
+
+.side-menu a {
+    color: #505050;
+    font-size: 15px;
+}
+
+
+
+header {
+  background-color: #EFEFED;
+  display: block;
+  width: 100%;
+  overflow: auto;
+  position: initial;
+  z-index: 999999;
+}
+.side-menu a{
+  color: gray
+
+}
+
+.single-wrap {
+    background-color: white;
+    padding: 15px 0px;
+    box-shadow: 0px 0px 25px gainsboro;
+    width: 100%;
+    overflow: auto;
+}
+
+.single-wrap p{
+  font-size: 16px;
+}
+.single-wrap h3{
+  font-size: 25px;
+}
+.text-wrap{
+  width: 40%;
+}
+
+p.small {
+    font-size: 17px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+}
+
+.side-menu ul{
+  list-style: none;
+  padding: 0px;
+  padding-left: 10px;
+}
+
+.main-menu li{
+  padding: 10px 0px;
+}
+
+ul.main-menu li a{
+     font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+    padding: 5px 0px;
+    display: block;
+    text-transform: uppercase;
+}
+
+ul.main-menu li a:hover{
+  text-decoration: none;
+  }
+
+ul.child-menu li a {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: gray;
+}
+
+ul.child-menu{
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+ul.second-child-menu.child {
+    padding-left: 10px;
+}
+
+.side-menu .active a {
+    color: #3A3939;
+    font-weight: 700;
+}
+
+.landing-header{
+    background-color: #EFEFED;
+  display: block;
+  width: 100%;
+  overflow: auto;
+  position: fixed;
+  z-index: 999999;
+}
+
+.white-section{
+  padding: 100px 0px;
+  background-color: white;
+}
+
+.single-wrap .col-sm-6 .portfolio img {
+    width: 100%;
+    max-height: 570px;
+    -webkit-filter: blur(1px);
+-moz-filter: blur(5px);
+-o-filter: blur(5px);
+-ms-filter: blur(5px);
+filter: blur(5px)
+}
+
+.single-wrap .col-sm-6 .portfolio img:hover {
+    width: 100%;
+    -webkit-filter: blur(0px);
+-moz-filter: blur(0px);
+-o-filter: blur(0px);
+-ms-filter: blur(0px);
+filter: blur(0px)
+}
+
+.portfolio{
+  position: relative;
+}
+.portfolio h2 {
+    position: absolute;
+    top: 50%;
+    z-index: 999;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    text-shadow: 0px 0px 40px black;
+}
+
+
+
+nav {
+
+}
+#showcase-slider{
+  overflow: hidden;
+}
+#showcase-slider .owl-item div{
+  padding:20px;
+}
+#showcase-slider .owl-item img{
+  display: block;
+  width: 80%;
+  height: auto;
+  margin: auto;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.single-img-wrap #showcase-slider .owl-item  img{
+  width: 100%;
+
+
+}
+
+.para-section{
+      position: relative;
+    overflow: hidden;
+    min-height: 250px;
+    padding: 0px;
+}
+
+.parallax-window {
+  min-height: 400px;
+    background: transparent;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.meny {
+  width: 100%;
+  text-align: right;
+}
+
+.menu ul{
+  width: 60%;
+  padding: 0px;
+}
+
+.meny li {
+  float: left;
+  padding: 30px;
+  margin-top: 10px;
+}
+
+.meny li a{
+  color: black;
+  padding: 10px;
+      font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'Quicksand', sans-serif;
+        font-weight: 600;
+}
+
+.white-section p{
+  font-size: 17px;
+}
+
+.overlay {
+  background-color: rgba(101, 101, 101, 0.23);
+}
+
+.landing-banner {
+  height: 100%;
+  background-size: cover;
+  color: white;
+}
+
+.landing-banner img {
+  width: 100%;
+  height: auto;
+}
+
+.landing-text{
+  text-align: center;
+  height: 100%;
+  position: relative;
+  font-weight: 300;
+  text-transform:uppercase;
+}
+
+.landing-text h1{
+  position: absolute;
+  top: 50%;
+  text-shadow:0px 0px 45px black;
+  width: 100%;
+  font-size: 50px;
+  margin-top:0px; 
+}
+
+footer{
+    text-align: center;
+  position: relative;
+  bottom: 0px;
+  background-color: #EFEFED;
+  border-top: 1px solid gray;
+  width: 100%;
+  padding: 10px 0px;
+}
+
+
+.social-wrap {
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.landing-footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  background-color: #EFEFED;
+  border-top: 1px solid gray;
+  width: 100%;
+  padding: 10px 0px;
+}
+
+
+/*DESIGN 3*/
+
+/*PORTFOLIO*/
+
+.portfolio-wrap {
+    width: 95%;
+    background-color: #FFFFFF;
+    line-height: 0;
+    margin: auto;
+    padding: 20px;
+    overflow: auto;
+}
+
+.project-item {
+    width: 100%;
+    height: auto;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    transition:all 1s ease;
+}
+
+.profolio-col {
+    width: 20%;
+    overflow: hidden;
+    height: auto;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+}
+
+.project-item a {
+    overflow: auto;
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 2
+}
+
+.project-item h3{
+  box-shadow: 0px 2px 5px rgba(193, 193, 193, 0.5), 0px -2px 5px rgba(193, 193, 193, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  z-index: 99999;
+  left: 0px;
+  right: 0px;
+  margin: 0;
+  top: 45%;
+  font-size: 20px;
+  text-align: center;
+      background: white;
+    padding: 10px 0px;
+  transition: all 0.5s linear;
+}
+
+.project-item a:hover > h3{
+  visibility: visible;
+  opacity: 1;
+}
+
+.project-item:hover{
+  cursor: pointer;
+}
+
+.project-item img:hover{
+  /*
+   -webkit-filter: blur(2px); /* Chrome, Safari, Opera */
+    /*filter: blur(2px);
+*/
+}
+
+.project-item img{
+  width: 100%;
+  height: auto;
+  zoom:5;
+  transition:all 1s;
+}
+
+/*SINGLE PAGE*/
+.single-side-wrap .project-desc h3{
+  float: left;
+  width: 30%;
+  margin: 0px;
+}
+.single-page-wrap {
+    width: 100%;
+    height: 100%;
+}
+.single-page-wrap .col-lg-4 {
+    height: 100%;
+}
+
+.single-side-wrap {
+    height: 100%;
+    background: white;
+}
+
+.single-side-wrap .side-wrap-top{
+  background-color: white;
+  border-bottom: 1px solid rgba(183, 183, 183, 0.31);
+  box-shadow: none;
+  padding: 20px;
+}
+
+.single-wrap-bottom{
+  padding: 20px;
+}
+
+.img-wrap img{
+  display: block;
+  margin: auto;
+}
+
+.single-side-wrap h3{
+  font-weight: 700;
+  margin: 20px 0px;
+}
+
+.single-side-wrap h3:first-child{
+  margin-top: 0px;
+}
+
+.project-desc p {
+    float: right;
+    width: 70%;
+    font-size: 16px;
+}
+
+
+
+.single-side-wrap h3 span {
+    font-size: 20px;
+    font-weight: 300;
+    margin-left:10px;
+}
+
+.content-wrap{
+  width: 80%;
+  margin: auto;
+}
+
+
+.section-wrap{
+      width: 80%;
+      padding: 20px;
+      background-color: white;
+      margin: auto;
+}
+
+.section h1{
+  font-size: 3em;
+}
+
+.section-wrap h3 {
+    font-size: 2em;
+}
+
+.section-wrap p{
+  font-size: 1.5em;
+}
+.hur-section{
+      width: 95%;
+      padding: 20px;
+      background-color: white;
+      margin: auto;
+}
+
+.om-section{
+      width: 95%;
+      padding: 20px;
+      background-color: white;
+      margin: auto;
+}
+
+.Kontakt-section{
+      width: 95%;
+      padding: 20px;
+      background-color: white;
+      margin: auto;
+}
+
+/*RESPONSIVE*/
+@media (max-width: 900px){
+.profolio-col{
+  width: 30%;
+}
+
+
+
+.section-wrap{
+  width: 85%;
+}
+
+}
+
+
+@media (max-width: 600px){
+
+  .profolio-col{
+  width: 50%;
+}
+
+.section-wrap{
+  width: 90%;
+}
+
+}
+
+
+@media (max-width: 400px){
+
+  .profolio-col{
+  width: 100%;
+}
+
+.section-wrap{
+  width: 100%;
+}
+
+.project-item{
+  margin-left: 0px;
+}
+
+}
