@@ -23,6 +23,7 @@ get_header();
 				<div class="side-wrap-top">
 					<div class="logo"><a href="http://aartslundsjo.mediahelpcrm.se/design3v3/index.html"><img src="<?php bloginfo('template_url');?>/img/logga.png"></a></div>
 				</div>
+				<?php //wp_nav_menu(array( 'menu' => 'main_nav', 'menu_class'))?>
 				<div class="side-wrap-bottom">
 					<nav class="side-menu">
 						<div class="menu-toggle"><i class="fa fa-bars"></i></div>
@@ -52,16 +53,16 @@ get_header();
 <div class="portfolio-wrap">
 	<h1>VÅRA <span class="portfolio-title">PROJEKT</span></h1>
 
-	<?php $the_query = new WP_Query( array( 'post_type' => 'showcase')); ?>
+	<?php $the_query = new WP_Query( array( 'post_type' => 'showcase', 'posts_per_page' => -1)); ?>
 
 	<div class="portfolio-grid">
 
 	<?php while($the_query->have_posts() ) : $the_query->the_post(); ?>
 
 			<div class="project-item">
-				<a href="/design3v3/single.html">
+				<a href="<?php the_permalink(); ?>">
 					<?php the_post_thumbnail('large'); ?>
-					<h3 class="project-text"><?php the_title(); ?></h3>
+					<div class="title-bak"><h3 class="project-text"><?php the_title(); ?></h3></div>
 				</a>
 			</div>
 			<?php endwhile;?>
@@ -144,180 +145,6 @@ get_header();
 
 </div>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		var url = window.location.href + 'wp-content/themes/lundsjo';
-		console.log(url)
-					$('#fullpage').fullpage({
-			anchors:['Hem', 'Portfolio', 'Hur', 'Om', 'Kontakt'],
-			autoScrolling:false,
-			fitToSection: false,
-			resize : false,
-			scrollingSpeed: 400,
-			fixedElements: ".side",
-			afterLoad: function(anchorLink, index){
-var loadedSection = $(this);
-var top = $(document).scrollTop()
-	
-//using anchorLink
-if(anchorLink == 'secondSlide'){
-alert("Section 2 ended loading");
-}
-}
-		});
-		var w = window.innerWidth;
-	
-sayHi();
-var image = $('.parallax-slider').attr('src');
-
-function sayHi() {
-	image = $('.parallax-slider').attr('src');
-
-	switch(image){
-		case url +'/img/banner6.jpg':
-			$(".parallax-slider").fadeOut(1000, function() {
-			$('.parallax-slider').attr('src', url + '/img/banner3.jpg') ;
-			}).fadeIn(800);
-			break;
-		case '/design3v3/img/banner5.jpg':
-			$(".parallax-slider").fadeOut(1000, function() {
-			$('.parallax-slider').attr('src', '/img/banner2.jpg') ;
-			}).fadeIn(800);
-			break;
-		case '/design3v3/img/banner2.jpg':
-			$(".parallax-slider").fadeOut(1000, function() {
-			$('.parallax-slider').attr('src', '/img/banner3.jpg') ;
-			}).fadeIn(800);
-			break
-		case '/design3v3/img/banner3.jpg':
-			$(".parallax-slider").fadeOut(1000, function() {
-			$('.parallax-slider').attr('src', '/img/banner5.jpg') ;
-			}).fadeIn(900);
-			break
-		default:
-			console.log('default');
-			break
-	}
-
-
-	console.log($('.parallax-slider').attr('src'));
-
-	setTimeout(sayHi,7000);
-
-}
-
-
-
-		$('.project-text').wrap('<div class="title-bak"></div>');
-if( w < 900 && w > 600){
-	console.log('ipad')
-						var $grid = $('.portfolio-grid').imagesLoaded( function() {
-$grid.masonry({
-		// options
-		itemSelector: '.project-item',
-		columnWidth: 5,
-		fitWidth: false,
-		});
-});
-	}else{
-		console.log('notipad')
-		var $grid = $('.portfolio-grid').imagesLoaded( function() {
-$grid.masonry({
-		// options
-		itemSelector: '.project-item',
-		fitWidth: true,
-		transitionDuration: '0.8s',
-		});
-	});
-			}
-		$( window ).resize(function() {
-					$grid.imagesLoaded().progress( function() {
-$grid.masonry('layout');
-});
-				});
-		$('.toggle-child').click(function(){
-			console.log('toggle')
-			var sibling = $(this).next();
-			console.log(sibling);
-			$(sibling).slideToggle();
-		});
-		$('.trigger-cat').click(function(){
-			$('.trigger-cat.active').removeClass('active');
-			$(this).addClass('active');
-			var allt = $('.project-item');
-			
-			var butik = $('.project-item.Butiksinredningar');
-			var inredning = $('.project-item.Inredningar');
-			var title = $(this).html();
-			if (title == 'Allt') {
-				//$('.portfolio-title').empty();
-				//$grid.masonry( 'remove',  allt )
-				$(allt).css({
-					'display':none,
-				});
-				for (var i = allt.length - 1; i >= 0; i--) {
-						console.log(allt);
-						$grid.masonry( 'addItems',  allt )
-					}
-				//$('.portfolio-title').html('Projekt')
-				$grid.on( 'removeComplete', function( event, removedItems ) {
-			
-					
-				} )
-			}else{
-				//$('.portfolio-title').empty();
-			//console.log($('.project-item.'+title) );
-			
-			//$('.portfolio-title').html(title);
-			var items = $('.project-item');
-			var remove = [];
-			for (var i = items.length - 1; i >= 0; i--) {
-				console.log(title);
-				console.log(items[i]);
-				console.log(items[i].className.indexOf(title));
-				if (items[i].className.indexOf(title) > -1) {
-			
-			$grid.masonry( 'addItems',  items[i] )
-				
-			}else{
-				$grid.masonry( 'remove',  items[i] )
-					
-			}
-					$grid.masonry('layout');
-				$grid.on( 'layoutComplete', onLayout );
-			}
-			console.log($(remove))
-			var add =  $('.project-item.'+title)
-				
-			function onLayout() {
-						$grid.masonry('reloadItems')
-			}
-			// bind event listener
-			
-			// un-bind event listener
-			
-			//$grid.masonry( 'prepended', add )
-			console.log();
-			}
-		});
-		var toggle = 0;
-		$('#showcase-slider').owlCarousel({
-		items:1,
-		loop:true,
-		autoplay: true,
-		autoplaySpeed: 300
-		})
-		$('li a').click(function(event){
-				//event.children('ul').slideToggle();
-				console.log($(event.target).parent());
-				var clicked = $(event.target).parent();
-				$(clicked).children('.child-menu').slideToggle();
-		});
-	
-	});
-$(window).on("load", function(){
-});
-</script>
 
 <?php get_footer(); ?>
 
