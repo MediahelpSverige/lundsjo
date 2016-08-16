@@ -68,40 +68,55 @@
         });
         var w = window.innerWidth;
 
-        sayHi();
+        
+        var current_slide = 0;
+
+        var slides = $('.slideshow-items');
+
         var image = $('.parallax-slider').attr('src');
+        console.log($(slides));
+        console.log($(slides).length);
+
+        sayHi();
+
+
 
         function sayHi() {
-            image = $('.parallax-slider').attr('src');
 
-            switch (image) {
-                case url + '/img/banner6.jpg':
-                    $(".parallax-slider").fadeOut(1000, function() {
-                        $('.parallax-slider').attr('src', url + '/img/banner3.jpg');
-                    }).fadeIn(800);
-                    break;
-                case '/design3v3/img/banner5.jpg':
-                    $(".parallax-slider").fadeOut(1000, function() {
-                        $('.parallax-slider').attr('src', '/img/banner2.jpg');
-                    }).fadeIn(800);
-                    break;
-                case '/design3v3/img/banner2.jpg':
-                    $(".parallax-slider").fadeOut(1000, function() {
-                        $('.parallax-slider').attr('src', '/img/banner3.jpg');
-                    }).fadeIn(800);
-                    break
-                case '/design3v3/img/banner3.jpg':
-                    $(".parallax-slider").fadeOut(1000, function() {
-                        $('.parallax-slider').attr('src', '/img/banner5.jpg');
-                    }).fadeIn(900);
-                    break
-                default:
-                    console.log('default');
-                    break
+ current_slide++
+
+                    console.log(current_slide);
+
+            if ($(slides).length <= current_slide) {
+
+                current_slide = 0;
             }
 
 
-            console.log($('.parallax-slider').attr('src'));
+            console.log($(slides[current_slide])[0]);
+
+            var slide = $(slides[current_slide])[0];
+
+            console.log(slide.innerHTML);
+
+            var src = $(slide.innerHTML).attr('src');
+            console.log(src);
+
+           // console.log(slides[current_slide]);
+
+
+            image = $('.parallax-slider').attr('src');
+
+
+            $(".parallax-slider").fadeOut(1000, function() {
+
+                        $('.parallax-slider').attr('src', src);
+
+
+                    }).fadeIn(800);
+    
+
+           
 
             setTimeout(sayHi, 7000);
 

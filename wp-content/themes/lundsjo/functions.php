@@ -278,7 +278,7 @@ function slideshow_post_init() {
 	 	'public' => true,
 
 
-      'label'  => 'Referensbilder på förstasidan',
+      'label'  => 'Bildspel på förstasidan',
 
 
       'description'        => __( 'Bildspel på förstasidan', 'landqvist' ),

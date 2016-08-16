@@ -15,13 +15,28 @@ get_header();
 ?>
 <div id="fullpage">
 	<div  class="page-wrap section">
+<?php $the_query = new WP_Query( array( 'post_type' => 'slide', 'posts_per_page' => -1)); ?>
+
+<?php while($the_query->have_posts() ) : $the_query->the_post(); ?>
+
+			<div class="slideshow-items hidden">
+
+			<img src="<?php the_post_thumbnail_url( 'full' ); ?>">
+
+			</div>
+
+
+		<?php wp_reset_postdata(); ?>
+
+		<?php endwhile;?>
+
 		<div class="parallax-window" data-iosFix="false" data-parallax="scroll" data-natural-height="1941" data-natural-width="3000" data-image-src="<?php bloginfo('template_url')?>/img/banner6.jpg">
 			<a href="#Portfolio"><i class="fa fa-angle-down"></i></a>
 		</div>
 		<div class="side col-sm-3 col-lg-2 col-md-2">
 			<div class="side-wrap">
 				<div class="side-wrap-top">
-					<div class="logo"><a href="http://aartslundsjo.mediahelpcrm.se/design3v3/index.html"><img src="<?php bloginfo('template_url');?>/img/logga.png"></a></div>
+					<div class="logo"><a href="<?php bloginfo('url'); ?>"><img src="<?php bloginfo('template_url');?>/img/logga.png"></a></div>
 				</div>
 				<?php //wp_nav_menu(array( 'menu' => 'main_nav', 'menu_class'))?>
 				<div class="side-wrap-bottom">
