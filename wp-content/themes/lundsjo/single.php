@@ -14,6 +14,7 @@ get_header();
 
 ?>
 <div id="fullpage">
+<h1>test</h1>
 	<div  class="page-wrap section">
 		<div class="parallax-window" data-iosFix="false" data-parallax="scroll" data-natural-height="1941" data-natural-width="3000" data-image-src="<?php bloginfo('template_url')?>/img/banner6.jpg">
 			<a href="#Portfolio"><i class="fa fa-angle-down"></i></a>
@@ -47,6 +48,9 @@ get_header();
 			</nav>
 		</div>
 	</div>
+</div>
+<div class="single">
+	
 </div>
 </div>
 

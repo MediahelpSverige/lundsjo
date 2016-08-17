@@ -49,11 +49,12 @@
 
         var url = window.location.href + 'wp-content/themes/lundsjo';
         console.log(url)
+        /*
         $('#fullpage').fullpage({
-            anchors: ['Hem', 'Portfolio', 'Hur', 'Om', 'Kontakt'],
-            autoScrolling: false,
-            fitToSection: false,
-            resize: false,
+            anchors: ['Hem','Portfolio', 'Om', 'Kontakt'],
+            autoScrolling: true,
+            fitToSection: true,
+            //resize: false,
             scrollingSpeed: 400,
             fixedElements: ".side",
             afterLoad: function(anchorLink, index) {
@@ -66,12 +67,40 @@
                 }
             }
         });
+        */
         var w = window.innerWidth;
+
+
+        $(function() {
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+
+
+
+
+
 
         
         var current_slide = 0;
 
         var slides = $('.slideshow-items');
+
+        var startingslide = $(slides[current_slide])[0];
+
+        var startingSrc = $(startingslide.innerHTML).attr('src');
+
+        $('.parallax-slider').attr('src', startingSrc);
 
         var image = $('.parallax-slider').attr('src');
         console.log($(slides));
@@ -90,6 +119,7 @@
             if ($(slides).length <= current_slide) {
 
                 current_slide = 0;
+
             }
 
 
@@ -152,9 +182,13 @@
         });
         $('.toggle-child').click(function() {
 
+
+
             var sibling = $(this).next();
   
-            $(sibling).slideToggle();
+            $(sibling).slideToggle(function(){
+                console.log('toggled');
+            });
         });
 
 
@@ -172,7 +206,7 @@
             //event.children('ul').slideToggle();
   
             var clicked = $(event.target).parent();
-            $(clicked).children('.child-menu').slideToggle();
+            //$(clicked).children('.child-menu').slideToggle();
         });
 
 
@@ -185,7 +219,7 @@
 
 
 
-            $('.main-menu').slideToggle();
+            $('.main-menu').slideToggle('slow');
 
 
 
@@ -286,7 +320,7 @@
 
 
 
-                $('.hidden-menu').slideToggle();
+                //$('.hidden-menu').slideToggle();
 
 
 
@@ -488,7 +522,7 @@
 
             $('.side-wrap-bottom').mouseleave(function() {
 
-                $('.hidden-menu').slideUp();
+                //$('.hidden-menu').slideUp();
 
             });
 
@@ -498,7 +532,7 @@
 
             $('.hidden-menu').mouseover(function() {
 
-                $('.hidden-menu').slideDown();
+                //$('.hidden-menu').slideDown();
 
             });
 

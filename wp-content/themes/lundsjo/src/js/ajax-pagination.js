@@ -69,9 +69,11 @@
 
 	*/
 
-	$(document).on( 'click', '.trigger-cat', function( event ) {
+	$(document).on( 'click', '.trigger-cat a', function( event ) {
 	event.preventDefault();
 	var text = $(this).html().toLowerCase();
+
+	console.log(text);
 
 	
 
