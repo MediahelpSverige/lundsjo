@@ -83,7 +83,7 @@ function my_ajax_pagination() {
 
 	$query_vars['post_type'] = 'showcase';
 	$query_vars['posts_per_page'] = -1;
-	
+
 
      $posts = new WP_Query( $query_vars );
 
@@ -114,7 +114,7 @@ function my_ajax_pagination() {
 
 
 
-add_theme_support( 'post-thumbnails' ); 
+add_theme_support( 'post-thumbnails' );
 
 
 
@@ -399,7 +399,7 @@ add_action( 'init', 'tjanst_custom_init' );
 
 
 class My_Walker_Nav_Menu extends Walker_Nav_Menu {
-
+/*
   function start_lvl(&$output, $depth) {
 
     $indent = str_repeat("\t", $depth);
@@ -408,6 +408,7 @@ class My_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 
   }
+	*/
 
 function start_el ( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 	$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
@@ -416,7 +417,7 @@ function start_el ( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$classes[] = 'menu-item-' . $item->ID;
 
 		if ($depth != 0) {
-			
+
 			unset($classes);
 			$classes = array();
 			$classes[] = 'trigger-cat';
@@ -530,7 +531,7 @@ function start_el ( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$item_output .= $args->link_before . $title . $args->link_after;
 		$item_output .= '</a>';
 		$item_output .= $args->after;
-			
+
 		}else if ($item->post_name == 'referenser'){
 
 		$item_output = $args->before;
