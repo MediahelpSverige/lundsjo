@@ -4,9 +4,6 @@ get_header();
 
 <div id="fullpage">
 	<div  class="page-wrap section">
-		<div class="parallax-window" data-iosFix="false" data-parallax="scroll" data-natural-height="1941" data-natural-width="3000" data-image-src="<?php bloginfo('template_url')?>/img/banner6.jpg">
-			<a href="#Portfolio"><i class="fa fa-angle-down"></i></a>
-		</div>
 		<div class="side col-sm-3 col-lg-2 col-md-2">
 			<div class="side-wrap">
 				<div class="side-wrap-top">
@@ -32,7 +29,7 @@ get_header();
 					<li data-menuanchor=""><a href="#Om">Om oss</a></li>
 					<li data-menuanchor=""><a href="#Kontakt">kontakt</a></li>
 				</ul>
-				
+
 			</nav>
 		</div>
 	</div>
@@ -42,8 +39,8 @@ get_header();
 <div class="col-md-2 col-lg-2"></div>
 <div class="col-lg-10 col-md-10">
 <div class="section-wrap">
-	
-	
+
+
 <?php
 			if ( have_posts() ) {
 				while ( have_posts() ) {
@@ -53,16 +50,30 @@ get_header();
 
 					<?php the_content();?>
 
-					<?php 
-
-					the_post_thumbnail('large');
+					<?php
 
 					?>
-<?php 
+<?php
 				} // end while ?>
 
 
-			<?php } ?> 
+			<?php } ?>
+
+			<div id="showcase-grid">
+
+
+			<?php $books = get_post_meta( $post->ID, 'grid', true );
+foreach( $books as $book){ ?>
+
+	<div class="showcase-item">
+		<a href="<?php the_permalink(); ?>">
+			<img src="<?php echo wp_get_attachment_url($book['image']); ?>">
+			<div class="title-bak"><h3 class="project-text">	<?php echo $book['text']; ?></h3></div>
+		</a>
+	</div>
+<?php } ?>
+
+</div>
 
 	</div>
 </div>
@@ -70,4 +81,37 @@ get_header();
 </div>
 </div>
 
+
 <?php get_footer(); ?>
+
+
+<script>
+
+$(document).ready(function(){
+
+	console.log('test');
+
+	var elem = document.querySelector('#showcase-grid');
+
+		var msnry = new Masonry( elem, {
+
+			  // options
+			  itemSelector: '.showcase-item',
+			  columnWidth: 200,
+			  gutter: 10,
+			  
+
+
+			});
+
+		elem.imagesLoaded().progress( function(){
+			msnry.masonry('layout');
+		})
+
+
+	});
+
+
+console.log('single');
+
+</script>

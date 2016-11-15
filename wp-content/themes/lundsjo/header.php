@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	
+
 
 	 <meta charset="UTF-8">
 
-	 <link rel="icon" 
+	 <link rel="icon"
 
-      type="image/png" 
+      type="image/png"
 
 
       href="<?php bloginfo('template_url'); ?>/img/icon.jpg">
@@ -48,11 +48,13 @@
 
 
 
-    <link type="text/css" rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/lightGallery.css" /> 
+    <link type="text/css" rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/lightGallery.css" />
 
 
 
-    <link type="text/css" rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/lightslider.css" />  
+    <link type="text/css" rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/lightslider.css" />
+
+    <script src="<?php bloginfo('template_url'); ?>/bundle.js"></script>
 
 <!--
 
@@ -108,6 +110,5 @@
 <body>
 
 <header>
-    
-</header>
 
+</header>

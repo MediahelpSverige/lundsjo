@@ -2,14 +2,14 @@
 /**
  * Development environment config settings
  *
- * Enter any WordPress config settings that are specific to this environment 
+ * Enter any WordPress config settings that are specific to this environment
  * in this file.
- * 
+ *
  * @package    Studio 24 WordPress Multi-Environment Config
  * @version    1.0
  * @author     Studio 24 Ltd  <info@studio24.net>
  */
-  
+
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */

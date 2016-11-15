@@ -1,13 +1,8 @@
 $(window).on("load", function(){
-
-
-		var w = window.innerWidth;
-
-
-			if (w > 600 && $('body').attr('class') != 'single') {
+		var w = window.innerWidth;
+			if (w > 600 && $('body').attr('class') != 'single') {
 
 var timeoutID;
-
 
   timeoutID = window.setTimeout(slowAlert, 1000);
 
@@ -15,80 +10,39 @@ var timeoutID;
 
 	$('.side-menu ul').slideDown();
 
-
 }
-
 }
-
 
 
 })
 
 
-
 $(document).ready(function(){
 
-
-
 			$('.menu-toggle').click(function(){
-
 				console.log(this);
-
 			$('.main-menu').slideToggle();
-
 		});
-
-
-
-
-
+
 	var hide = 0;
-
-
-
+
 var landingTop = $('.parallax-window').scrollTop();
 
 var landingBot = landingTop + $('.parallax-window').height();
 
-
-
 	var top = $(window).scrollTop()
-
-
 
 	var toggle = 0;
 
-
-
 	var w = window.innerWidth;
-
-
-
-	var h = window.innerHeight;
-
-
-
+	var h = window.innerHeight;
 	console.log(w)
-
-
-
-
-
-
-
-
-
+
 	var nav = $('.side');
-
-
-
 		$('body').append(nav)
 
-
-
+
 	if (w <= 600) {
-
-
 
 		$('.tillbaka').click(function(){
 
@@ -333,7 +287,7 @@ var landingBot = landingTop + $('.parallax-window').height();
 
 
 
-	 		
+
 
 console.log(b);
 
@@ -341,7 +295,7 @@ console.log(b);
 
 console.log(top);
 
-	 		
+
 
 
 
@@ -367,7 +321,7 @@ console.log(top);
 
 	 			var title = $(boxar[i].childNodes[3]);
 
-				
+
 
 	 			console.log($(title).offset().top);
 
@@ -381,7 +335,7 @@ console.log(top);
 
 	 		};
 
-	 	 		
+
 
 
 
@@ -537,7 +491,7 @@ console.log(w);
 
 */
 
-	
+
 
 	}else if(top > 100 ) {
 
@@ -572,7 +526,7 @@ console.log(w);
 
 
 
-		
+
 
 	$('nav.side-menu').css({
 
@@ -600,7 +554,7 @@ console.log(w);
 
 	$('.main-menu a').click(function(){
 
-		
+
 
 		$('.side').css({
 
@@ -610,7 +564,7 @@ console.log(w);
 
 	})
 
-	
+
 
 	$('#meny-toggle').click(function(){
 
@@ -706,7 +660,7 @@ console.log(w);
 
 }
 
-		
+
 
 
 

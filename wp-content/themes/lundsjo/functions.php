@@ -382,6 +382,12 @@ function tjanst_custom_init() {
 
 		'menu_position'      => null,
 
+		'show_in_rest'       => true,
+
+  	'rest_base'          => 'showcase',
+
+  	'rest_controller_class' => 'WP_REST_Posts_Controller',
+
 
 		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 
