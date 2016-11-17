@@ -84,20 +84,16 @@ get_header();
 <div class="portfolio-wrap">
 	<!--<h1>VÅRA <span class="portfolio-title">PROJEKT</span></h1>-->
 
-	<?php $the_query = new WP_Query( array( 'post_type' => 'showcase', 'posts_per_page' => -1)); ?>
-
 	<div class="portfolio-grid">
 
-	<?php while($the_query->have_posts() ) : $the_query->the_post(); ?>
-
 			<div class="project-item">
-				<a href="<?php the_permalink(); ?>">
-					<?php the_post_thumbnail('large'); ?>
-					<div class="title-bak"><h3 class="project-text"><?php the_title(); ?></h3></div>
+				<a href="<?php //the_permalink(); ?>">
+					<?php// the_post_thumbnail('large'); ?>
+					<div class="title-bak"><h3 class="project-text"><?php //the_title(); ?></h3></div>
 				</a>
 			</div>
-			<?php wp_reset_postdata(); ?>
-			<?php endwhile;?>
+			<?php// wp_reset_postdata(); ?>
+			<?php// endwhile;?>
 	</div>
 </div>
 

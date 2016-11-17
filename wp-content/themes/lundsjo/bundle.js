@@ -22154,23 +22154,25 @@
 	    var image = $(".parallax-slider").attr("src");
 	    $(".parallax-slider").fadeOut(1e3, function () {
 	
-	        var msnry = new Masonry('.portfolio-grid', {
+	        $.get("http://localhost:8080/aartslundsjo/wp-json/wp/v2/showcase/", function (data) {
+	            console.log(data);
 	
-	            // options
-	            itemSelector: ".project-item",
-	            fitWidth: true,
-	            transitionDuration: "0.8s"
+	            for (var i = 0; i < data.length; i++) {
+	                console.log(data[i].better_featured_image.source_url);
+	
+	                $('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="' + data[i].link + '"><img src="' + data[i].better_featured_image.source_url + '"> <div class="title-bak"><h3 class="project-text">' + data[i].title.rendered + '</h3></div></a></div>');
+	
+	                var msnry = new Masonry('.grid_canvas', {
+	
+	                    // options
+	                    itemSelector: ".project-item",
+	                    fitWidth: true,
+	                    transitionDuration: "0.8s"
+	                });
+	
+	                msnry.layout();
+	            }
 	        });
-	
-	        var grid = $('.portfolio-grid');
-	
-	        $('.portfolio-grid').remove();
-	
-	        $('.grid_canvas').html(grid);
-	
-	        $('.portfolio-grid').addClass('animated zoomIn');
-	
-	        msnry.layout();
 	    });
 	    //setTimeout(sayHi, 4000)
 	}

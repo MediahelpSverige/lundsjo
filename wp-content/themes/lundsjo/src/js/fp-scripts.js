@@ -354,25 +354,38 @@ var grid;
             var image = $(".parallax-slider").attr("src");
             $(".parallax-slider").fadeOut(1e3, function() {
 
-              var msnry = new Masonry( '.portfolio-grid', {
-
-                      // options
-                      itemSelector: ".project-item",
-                      fitWidth: true,
-                      transitionDuration: "0.8s"
-              })
 
 
+              $.get( "http://localhost:8080/aartslundsjo/wp-json/wp/v2/showcase/", function( data ) {
+                console.log(data);
 
-              var grid = $('.portfolio-grid');
+                for (var i = 0; i < data.length; i++) {
+                  console.log(data[i].better_featured_image.source_url);
 
-              $('.portfolio-grid').remove();
+                  $('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
 
-              $('.grid_canvas').html(grid);
+                  var msnry = new Masonry( '.grid_canvas', {
 
-              $('.portfolio-grid').addClass('animated zoomIn');
+                          // options
+                          itemSelector: ".project-item",
+                          fitWidth: true,
+                          transitionDuration: "0.8s"
+                  })
 
-              msnry.layout();
+                  msnry.layout();
+
+
+
+                }
+
+
+                });
+
+
+
+
+
+
 
 
             })
