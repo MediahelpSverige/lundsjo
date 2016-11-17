@@ -22154,7 +22154,7 @@
 	    var image = $(".parallax-slider").attr("src");
 	    $(".parallax-slider").fadeOut(1e3, function () {
 	
-	        var ajax = $.get("http://aartslundsjo.mediahelpcrm.se/wp-json/wp/v2/showcase", function (data) {
+	        var ajax = $.get("http://aartslundsjo.mediahelpcrm.se/wp-json/wp/v2/showcase?filter[posts_per_page]=-1", function (data) {
 	            console.log(data);
 	
 	            for (var i = 0; i < data.length; i++) {
