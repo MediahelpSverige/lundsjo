@@ -360,7 +360,7 @@ var grid;
 
               var ajax = $.ajax({
 
-                url: ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?filter[posts_per_page]=-1',
+                url: ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100',
                 dataType: 'json',
                 beforeSend: function( xhr ) {
 
