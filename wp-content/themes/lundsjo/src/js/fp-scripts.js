@@ -354,21 +354,18 @@ var grid;
             var image = $(".parallax-slider").attr("src");
             $(".parallax-slider").fadeOut(1e3, function() {
 
+              console.log(WP_API_Settings);
+
 
 
               var ajax = $.ajax({
-                headers : {
-        'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-    },
-                url: 'http://aartslundsjo.mediahelpcrm.se/wp-json/wp/v2/showcase?filter[posts_per_page]=-1',
+
+                url: ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?filter[posts_per_page]=-1',
+                dataType: 'json',
                 beforeSend: function( xhr ) {
 
-                  xhr.setRequestHeader('X-WP-Nonce', WP_API_Settings.nonce);
-/*
-                  if (beforeSend) {
-                    return beforeSend.apply(this, arguments);
-                  }
-                  */
+                  //xhr.setRequestHeader('X-WP-Nonce', WP_API_Settings.nonce);
+
 
                 },
 
