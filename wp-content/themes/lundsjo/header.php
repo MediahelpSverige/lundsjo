@@ -9,7 +9,6 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
-
 	 <meta charset="UTF-8">
 
 	 <link rel="icon"
@@ -53,6 +52,10 @@
 
 
     <link type="text/css" rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/lightslider.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+
 
     <script src="<?php bloginfo('template_url'); ?>/bundle.js"></script>
 

@@ -39,6 +39,11 @@ module.exports = {
 			},
 
 			{
+				test: /\.css$/,
+				loaders:['style-loader', 'css-loader?sourceMap']
+			},
+
+			{
 				test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
 				loader: 'url-loader?limit=100000'
 			},
