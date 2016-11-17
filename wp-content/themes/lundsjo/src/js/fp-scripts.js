@@ -356,7 +356,7 @@ var grid;
 
 
 
-              $.get( "http://localhost:8080/aartslundsjo/wp-json/wp/v2/showcase/", function( data ) {
+              $.get( "http://aartslundsjo.mediahelpcrm.se/wp-json/wp/v2/showcase", function( data ) {
                 console.log(data);
 
                 for (var i = 0; i < data.length; i++) {
