@@ -19,40 +19,10 @@ get_header();
 
 	<div class="landing_section">
 		<div class="grid_canvas">
+
+
 <?php $the_query = new WP_Query( array( 'post_type' => 'slide', 'posts_per_page' => -1)); ?>
 
-<?php $i = 0; ?>
-
-<?php while($the_query->have_posts() ) : $the_query->the_post(); ?>
-
-
-
-
-			<div class="slideshow-items hidden">
-
-		<?php
-
-		if ($i === 0) {
-
-
-
-			$firstimage = the_post_thumbnail_url( 'full' );
-
-
-				}
-
-?>
-			<img src="<?php the_post_thumbnail_url( 'full' ); ?>">
-
-			</div>
-
-
-
-<?php $i++ ?>
-
-		<?php wp_reset_postdata(); ?>
-
-		<?php endwhile;?>
 
 
 

@@ -340,18 +340,7 @@ var grid;
     })
 
         function displayGrid(current_slide, slides, grid) {
-            current_slide++;
-            console.log(current_slide);
-            if ($(slides).length <= current_slide) {
-                current_slide = 0
-            }
-            console.log($(slides[current_slide])[0]);
-            var slide = $(slides[current_slide])[0];
-            console.log(slide.innerHTML);
-            var src = $(slide.innerHTML).attr("src");
-            console.log($(".parallax-slider").innerHTML);
-            console.log(slides[current_slide]);
-            var image = $(".parallax-slider").attr("src");
+
             $(".parallax-slider").fadeOut(1e3, function() {
 
               console.log(WP_API_Settings);
