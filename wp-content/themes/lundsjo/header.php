@@ -50,9 +50,6 @@
     <link type="text/css" rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/lightGallery.css" />
 
 
-
-    <link type="text/css" rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/lightslider.css" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
 
