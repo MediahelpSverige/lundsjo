@@ -356,54 +356,47 @@ var grid;
 
 
 
-              var ajax = $.get( "http://aartslundsjo.mediahelpcrm.se/wp-json/wp/v2/showcase?filter[posts_per_page]=-1", function( data ) {
-                console.log(data);
+              var ajax = $.ajax({
+                headers : {
+        'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+                url: 'http://aartslundsjo.mediahelpcrm.se/wp-json/wp/v2/showcase?filter[posts_per_page]=-1',
+                beforeSend: function( xhr ) {
 
-                for (var i = 0; i < data.length; i++) {
-                  console.log(data[i].better_featured_image.source_url);
+                  xhr.setRequestHeader('X-WP-Nonce', WP_API_Settings.nonce);
+/*
+                  if (beforeSend) {
+                    return beforeSend.apply(this, arguments);
+                  }
+                  */
 
-                  $('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
+                },
 
+              })
+                .done(function( data ){
 
-                  imagesLoaded( document.querySelector('.grid_canvas'), function( instance ) {
-                    var msnry = new Masonry( '.grid_canvas', {
+                  console.log(data);
 
-                                // options
-                                itemSelector: ".project-item",
-                                fitWidth: true,
-                                transitionDuration: "0.8s"
-                        })
-});
+                  for (var i = 0; i < data.length; i++) {
+                    console.log(data[i].better_featured_image.source_url);
 
-
-
-
-
+                    $('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
 
 
+                    imagesLoaded( document.querySelector('.grid_canvas'), function( instance ) {
+                      var msnry = new Masonry( '.grid_canvas', {
+                                  // options
+                                  itemSelector: ".project-item",
+                                  fitWidth: true,
+                                  transitionDuration: "0.8s"
+                              })
+                        });
 
                 }
 
 
-                })
-
-                .done(function() {
 
                 })
-
-
-                .always(function() {
-                });
-
-
-  //msnry.layout();
-
-
-
-
-
-
-
 
             })
             //setTimeout(sayHi, 4000)

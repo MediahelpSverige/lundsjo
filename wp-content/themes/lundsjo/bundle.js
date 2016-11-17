@@ -22154,7 +22154,23 @@
 	    var image = $(".parallax-slider").attr("src");
 	    $(".parallax-slider").fadeOut(1e3, function () {
 	
-	        var ajax = $.get("http://aartslundsjo.mediahelpcrm.se/wp-json/wp/v2/showcase?filter[posts_per_page]=-1", function (data) {
+	        var ajax = $.ajax({
+	            headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+	            },
+	            url: 'http://aartslundsjo.mediahelpcrm.se/wp-json/wp/v2/showcase?filter[posts_per_page]=-1',
+	            beforeSend: function beforeSend(xhr) {
+	
+	                xhr.setRequestHeader('X-WP-Nonce', WP_API_Settings.nonce);
+	                /*
+	                                  if (beforeSend) {
+	                                    return beforeSend.apply(this, arguments);
+	                                  }
+	                                  */
+	            }
+	
+	        }).done(function (data) {
+	
 	            console.log(data);
 	
 	            for (var i = 0; i < data.length; i++) {
@@ -22164,7 +22180,6 @@
 	
 	                imagesLoaded(document.querySelector('.grid_canvas'), function (instance) {
 	                    var msnry = new Masonry('.grid_canvas', {
-	
 	                        // options
 	                        itemSelector: ".project-item",
 	                        fitWidth: true,
@@ -22172,10 +22187,7 @@
 	                    });
 	                });
 	            }
-	        }).done(function () {}).always(function () {});
-	
-	        //msnry.layout();
-	
+	        });
 	    });
 	    //setTimeout(sayHi, 4000)
 	}

@@ -38,6 +38,10 @@ function enqueue_jquery() {
 
 add_action('wp_enqueue_scripts', 'enqueue_jquery');
 
+function get_json_url(){
+	return "http://localhost:8080/aartslundsjo/";
+}
+
 
 function my_enqueue_assets() {
 
@@ -53,6 +57,7 @@ function my_enqueue_assets() {
 
     wp_enqueue_script( 'script',  get_template_directory_uri() . '/js/script.js', array( 'jquery' ), NULL, true);
 
+  wp_enqueue_script( 'bundle',  get_template_directory_uri() . 'bundle.js', array( 'jquery' ), NULL, true);
 
     global $wp_query;
 
@@ -60,6 +65,8 @@ function my_enqueue_assets() {
 	'ajaxurl' => admin_url( 'admin-ajax.php' ),
 	'query_vars' => json_encode( $wp_query->query )
 	));
+
+	wp_localize_script( 'bundle', 'WP_API_Settings', array( 'root' => esc_url_raw( get_json_url() ), 'nonce' => wp_create_nonce( 'wp_json' ) ) );
 
 
 }
