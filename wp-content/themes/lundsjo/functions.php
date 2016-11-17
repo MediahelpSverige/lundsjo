@@ -39,7 +39,7 @@ function enqueue_jquery() {
 add_action('wp_enqueue_scripts', 'enqueue_jquery');
 
 function get_json_url(){
-	return "http://localhost:8080/aartslundsjo/";
+	return bloginfo();
 }
 
 
