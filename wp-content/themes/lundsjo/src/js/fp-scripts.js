@@ -405,6 +405,9 @@ var grid;
 
 
                 })
+								.fail(function(error) {
+	    						console.error(error);
+	  					})
 
             })
             //setTimeout(sayHi, 4000)
