@@ -32,13 +32,12 @@ get_header();
         <div class="singel-content-wrap">
         <h1>test</h1>
         <?php the_content(); ?>
-        <?php print_r($post); ?>
         <?php
 			if ( have_posts() ) {
 				while ( have_posts() ) {
 					the_post();
 
-					the_content(); ?> 
+					the_content(); ?>
 
 
             <div class="col-lg-4">

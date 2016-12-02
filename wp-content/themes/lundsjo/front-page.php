@@ -14,6 +14,7 @@ get_header();
 
 
 ?>
+<div id="reactElement"></div>
 <div id="fullpage">
 	<div  class="page-wrap">
 
@@ -44,32 +45,17 @@ get_header();
 				<?php //wp_nav_menu(array( 'menu' => 'main_nav', 'menu_class'))?>
 				<div class="side-wrap-bottom">
 				<div class="menu-toggle"><i class="fa fa-bars"></i></div>
-				<?php wp_nav_menu( array( 'menu' => 'sidmenu', 'menu_class' => 'main-menu', 'container' => 'nav', 'container_class' => 'side-menu', 'walker' => new My_Walker_Nav_Menu()) ); ?>
+				<?php wp_nav_menu( array( 'menu' => 'sidmenu', 'menu_class' => 'main-menu', 'container' => 'nav', 'container_class' => 'side-menu')); ?>
 		</div>
 	</div>
 </div>
 </div>
 </div>
-<div id="Portfolio" class="section fp-auto-height">
-<div class="portfolio-wrap">
-	<!--<h1>VÅRA <span class="portfolio-title">PROJEKT</span></h1>-->
 
-	<div class="portfolio-grid">
-
-			<div class="project-item">
-				<a href="<?php //the_permalink(); ?>">
-					<?php// the_post_thumbnail('large'); ?>
-					<div class="title-bak"><h3 class="project-text"><?php //the_title(); ?></h3></div>
-				</a>
-			</div>
-			<?php// wp_reset_postdata(); ?>
-			<?php// endwhile;?>
-	</div>
-</div>
 
 <div id="Om" class="hur-section section fp-auto-height">
 <div class="row">
-	<div class="col-md-2 col-lg-2"></div>
+	<div class="col-md-3 col-lg-2"></div>
 	<div class="col-md-9 col-lg-10">
 		<div class="section-wrap">
 		<?php the_field('hur_vi_arbetar'); ?>
@@ -107,8 +93,6 @@ get_header();
 	</div>
 </div>
 
-
-</div>
 
 <script type="text/javascript">
 

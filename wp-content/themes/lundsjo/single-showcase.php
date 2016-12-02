@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<div id="fullpage">
+<div id="fullpage" class="showcase">
 	<div  class="page-wrap section">
 		<div class="side col-sm-3 col-lg-2 col-md-2">
 			<div class="side-wrap">
@@ -14,20 +14,13 @@ get_header();
 					<nav class="side-menu">
 						<div class="menu-toggle"><i class="fa fa-bars"></i></div>
 						<ul class="main-menu">
-							<li class="portfolio" data-menuanchor="Portfolio"><a class="toggle-child" href="#Portfolio">Portfolio</a>
-							<ul class="hidden-menu">
-								<li class="trigger-cat">Allt</li>
-								<li class="trigger-cat">Butiksinredningar</li>
-								<li class="trigger-cat">Inredningar</li>
-								<li class="trigger-cat">Möbler</li>
-								<li class="trigger-cat">Utställningar</li>
-							</ul>
+							<li class="portfolio" data-menuanchor="Portfolio"><a class="toggle-child" href="<?php bloginfo('url'); ?>">Portfolio</a>
 						</li>
-						<li><a class="" href="/design3v3/referens.html">Referenser</a>
+						<li><a class="" href="<?php bloginfo('url'); ?>">Referenser</a>
 					</li>
-					<li data-menuanchor=""><a href="#Hur">Hur vi arbetar</a></li>
-					<li data-menuanchor=""><a href="#Om">Om oss</a></li>
-					<li data-menuanchor=""><a href="#Kontakt">kontakt</a></li>
+					<li data-menuanchor=""><a href="<?php bloginfo('url'); ?>#Hur">Hur vi arbetar</a></li>
+					<li data-menuanchor=""><a href="<?php bloginfo('url'); ?>#Om">Om oss</a></li>
+					<li data-menuanchor=""><a href="<?php bloginfo('url'); ?>#Kontakt">kontakt</a></li>
 				</ul>
 
 			</nav>
@@ -63,6 +56,8 @@ get_header();
 
 
 			<?php $books = get_post_meta( $post->ID, 'grid', true );
+			if ($books != "") {
+
 foreach( $books as $book){ ?>
 
 	<div class="showcase-item">
@@ -71,7 +66,9 @@ foreach( $books as $book){ ?>
 			<div class="title-bak"><h3 class="project-text">	<?php echo $book['text']; ?></h3></div>
 		</a>
 	</div>
-<?php } ?>
+<?php
+			}
+ } ?>
 
 </div>
 
@@ -89,29 +86,28 @@ foreach( $books as $book){ ?>
 
 $(document).ready(function(){
 
-	console.log('test');
+
 
 	var elem = document.querySelector('#showcase-grid');
 
-		var msnry = new Masonry( elem, {
+	console.log('elem', elem.innerHTML);
 
-			  // options
-			  itemSelector: '.showcase-item',
-			  columnWidth: 200,
-			  gutter: 10,
-			  
+	if (elem.innerHTML != "" ) {
 
-
-			});
-
-		elem.imagesLoaded().progress( function(){
-			msnry.masonry('layout');
-		})
-
+		imagesLoaded( document.querySelector('.showcase-grid'), function( instance ) {
+			var msnry = new Masonry( '.showcase-grid', {
+									// options
+									itemSelector: ".showcase-item",
+									fitWidth: true,
+									transitionDuration: "0.8s",
+									gutter:10
+							})
+				});
+	}
 
 	});
 
 
-console.log('single');
+
 
 </script>

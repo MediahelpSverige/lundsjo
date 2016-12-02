@@ -41,46 +41,19 @@ var grid;
 
 
 
-
-
-
         if (w < 900 && w > 600) {
 
 					grid = true;
 
-					/*
 
-        	var msnry = new Masonry( '.portfolio-grid', {
-  				// options
-  				         itemSelector: ".project-item",
-                    columnWidth: 200,
-                    fitWidth: true
-
-
-			});
-							*/
         } else {
 
 					grid = true;
 
-/*
-            var msnry = new Masonry( '.portfolio-grid', {
-
-                    // options
-                    itemSelector: ".project-item",
-                    fitWidth: true,
-                    transitionDuration: "0.8s"
-            })
-*/
 
         }
         $(window).resize(function() {
-        	/*
-        	console.log('resize');
-            $grid.imagesLoaded().progress(function() {
-                $grid.masonry("layout")
-            })
-            */
+
         });
         $(".toggle-child").click(function() {
             var sibling = $(this).next();
@@ -90,10 +63,10 @@ var grid;
         });
         var toggle = 0;
         $("li a").click(function(event) {
-            //event.children('ul').slideToggle();
             var clicked = $(event.target).parent()
         });
         $(".menu-toggle").click(function() {
+					console.log('slide')
             $(".main-menu").slideToggle("slow")
         });
         var hide = 0;
@@ -339,6 +312,11 @@ var grid;
         })
     })
 
+
+
+
+
+
         function displayGrid(current_slide, slides, grid) {
 
             $(".parallax-slider").fadeOut(1e3, function() {
@@ -346,17 +324,11 @@ var grid;
               console.log(WP_API_Settings);
 
 
-
               var ajax = $.ajax({
 
                 url: ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100',
                 dataType: 'json',
-                beforeSend: function( xhr ) {
 
-                  //xhr.setRequestHeader('X-WP-Nonce', WP_API_Settings.nonce);
-
-
-                },
 
               })
                 .done(function( data ){
@@ -379,6 +351,56 @@ var grid;
                         });
 
                 }
+
+								//enable click on cats
+								$(document).on("click", ".trigger-cat a", function(event) {
+										event.preventDefault();
+										var text = $(this).html().toLowerCase();
+										console.log(text);
+
+										var urlcat = ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100&filter[category_name]='+ text +'';
+
+										if (text == 'allt') {
+											urlcat = ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100+';
+										}
+
+
+										$.ajax({
+											url: urlcat,
+			                dataType: 'json',
+												beforeSend: function() {
+														$(".landing_section").find(".grid_canvas").empty()
+												},
+												success: function(data) {
+
+													console.log(data);
+
+													for (var i = 0; i < data.length; i++) {
+														console.log(data[i].better_featured_image.source_url);
+
+														$('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
+
+
+														imagesLoaded( document.querySelector('.grid_canvas'), function( instance ) {
+															var msnry = new Masonry( '.grid_canvas', {
+																					// options
+																					itemSelector: ".project-item",
+																					fitWidth: true,
+																					transitionDuration: "0.8s"
+																			})
+																});
+
+												}
+
+												},
+												complete: function() {
+													console.log($(".portfolio-grid"));
+														var masonry = $(".portfolio-grid").data("masonry");
+														console.log("grid completed")
+												}
+										})
+								})
+
 
 
 

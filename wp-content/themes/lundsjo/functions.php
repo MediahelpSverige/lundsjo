@@ -57,7 +57,7 @@ function my_enqueue_assets() {
 
     wp_enqueue_script( 'script',  get_template_directory_uri() . '/js/script.js', array( 'jquery' ), NULL, true);
 
-  wp_enqueue_script( 'fp-scripts',  get_template_directory_uri() . '/src/js/fp-scripts.js', array( 'jquery' ), NULL, true);
+  	wp_enqueue_script( 'fp-scripts',  get_template_directory_uri() . '/src/js/fp-scripts.js', array( 'jquery' ), NULL, true);
 
     global $wp_query;
 

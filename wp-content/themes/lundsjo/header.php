@@ -11,12 +11,6 @@
 
 	 <meta charset="UTF-8">
 
-	 <link rel="icon"
-
-      type="image/png"
-
-
-      href="<?php bloginfo('template_url'); ?>/img/icon.jpg">
 
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -56,40 +50,6 @@
 
     <script src="<?php bloginfo('template_url'); ?>/bundle.js"></script>
 
-<!--
-
-
-    <script src="/design3v3/js/jquery.mousewheel.min.js"></script>
-
-
-
-    <script src="/design2/js/bootstrap.min.js"></script>
-
-
-
-    <script src="/design3v3/js/parallax.min.js"></script>
-
-
-
-    <script src="/design2/js/owl.carousel.min.js"></script>
-
-
-
-    <script src="/design3v3/js/jquery.fullPage.min.js"></script>
-
-
-
-    <script src="/design3v3/js/custom.js"></script>
-
-
-
-    <script src="/design3v3/js/lightslider.min.js"></script>
-
-
-
-    <script src="/design3v3/js/lightGallery.min.js"></script>
-
-    -->
 
     <link href='https://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
 

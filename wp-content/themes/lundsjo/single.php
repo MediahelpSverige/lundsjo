@@ -30,13 +30,6 @@ get_header();
 						<div class="menu-toggle"><i class="fa fa-bars"></i></div>
 						<ul class="main-menu">
 							<li class="portfolio" data-menuanchor="Portfolio"><a class="toggle-child" href="#Portfolio">Portfolio</a>
-							<ul class="hidden-menu">
-								<li class="trigger-cat">Allt</li>
-								<li class="trigger-cat">Butiksinredningar</li>
-								<li class="trigger-cat">Inredningar</li>
-								<li class="trigger-cat">Möbler</li>
-								<li class="trigger-cat">Utställningar</li>
-							</ul>
 						</li>
 						<li><a class="" href="/design3v3/referens.html">Referenser</a>
 					</li>
@@ -44,13 +37,13 @@ get_header();
 					<li data-menuanchor=""><a href="#Om">Om oss</a></li>
 					<li data-menuanchor=""><a href="#Kontakt">kontakt</a></li>
 				</ul>
-				
+
 			</nav>
 		</div>
 	</div>
 </div>
 <div class="single">
-	
+
 </div>
 </div>
 

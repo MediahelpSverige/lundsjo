@@ -1,9 +1,11 @@
-<?php /* template name: referenser */ 
+<?php /* template name: referenser */
 
 get_header();
 
 
 ?>
+
+<div class="page-wrap" id="referenser">
 
 		<div class="side col-sm-3 col-lg-2 col-md-2">
 			<div class="side-wrap">
@@ -12,17 +14,17 @@ get_header();
 				</div>
 				<?php //wp_nav_menu(array( 'menu' => 'main_nav', 'menu_class'))?>
 				<div class="side-wrap-bottom">
-				<?php wp_nav_menu( array( 'menu' => 'sidmenu', 'menu_class' => 'main-menu', 'container' => 'nav', 'container_class' => 'side-menu', 'walker' => new My_Walker_Nav_Menu()) ); ?>
+				<?php wp_nav_menu( array( 'menu' => 'singlemenu', 'menu_class' => 'main-menu', 'container' => 'nav', 'container_class' => 'side-menu', 'walker' => new My_Walker_Nav_Menu()) ); ?>
 		</div>
 	</div>
 </div>
 
-	<div class="col-md-2 col-lg-1"></div>
+	<div class="col-md-3 col-lg-2"></div>
 	<div class="col-md-9 col-lg-10">
 
 	<div class="section-wrap">
 
-<?php 
+<?php
 
 if ( have_posts() ) {
 				while ( have_posts() ) {
@@ -38,6 +40,7 @@ if ( have_posts() ) {
 
 </div>
 
+</div>
 </div>
 
 <?php get_footer(); ?>

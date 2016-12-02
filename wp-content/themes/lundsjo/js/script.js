@@ -1,51 +1,15 @@
-(function($) {
-  
-    $(document).on("click", ".trigger-cat a", function(event) {
-        event.preventDefault();
-        var text = $(this).html().toLowerCase();
-        console.log(text);
-        $.ajax({
-            url: ajaxpagination.ajaxurl,
-            type: "post",
-            data: {
-                action: "ajax_pagination",
-                query_vars: ajaxpagination.query_vars,
-                page: text
-            },
-            beforeSend: function() {
-                $(".portfolio-wrap").find(".portfolio-grid").empty()
-            },
-            success: function(html) {
-                var new_div = $(html).hide();
-                $(".portfolio-wrap").find(".portfolio-grid").append(new_div);
-                $(".portfolio-grid").show();
-                $(".project-item").fadeIn("slow", function() {})
-            },
-            complete: function() {
-            	console.log($(".portfolio-grid"));
-                var masonry = $(".portfolio-grid").data("masonry");
-                masonry.reloadItems();
-                masonry.layout();
-                $(window).resize(function() {
-                    $grid.masonry()
-                });
-                console.log("grid completed")
-            }
-        })
-    })
-})(jQuery);
 /*!
- 
- 
+
+
  * Bootstrap v3.3.5 (http://getbootstrap.com)
- 
- 
+
+
  * Copyright 2011-2015 Twitter, Inc.
- 
- 
+
+
  * Licensed under the MIT license
- 
- 
+
+
  */
 if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requires jQuery"); + function(a) {
     "use strict";
@@ -1003,23 +967,23 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
 })
 
 /*!
- 
- 
+
+
  * fullPage 2.7.7
- 
- 
+
+
  * https://github.com/alvarotrigo/fullPage.js
- 
- 
+
+
  * @license MIT licensed
- 
- 
+
+
  *
- 
- 
+
+
  * Copyright (C) 2015 alvarotrigo.com - A project by Alvaro Trigo
- 
- 
+
+
  */
 ! function(e, n) {
     "use strict";
@@ -2055,23 +2019,23 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
     l = ie
 });
 /*!
- 
- 
+
+
  * jQuery Mousewheel 3.1.13
- 
- 
+
+
  *
- 
- 
+
+
  * Copyright 2015 jQuery Foundation and other contributors
- 
- 
+
+
  * Released under the MIT license.
- 
- 
+
+
  * http://jquery.org/license
- 
- 
+
+
  */
 ! function(a) {
     "function" == typeof define && define.amd ? define(["jquery"], a) : "object" == typeof exports ? module.exports = a : a(jQuery)
@@ -2150,11 +2114,11 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
     })
 });
 /*! lightgallery - v1.2.14 - 2016-01-18
- 
- 
+
+
  * http://sachinchoolur.github.io/lightGallery/
- 
- 
+
+
  * Copyright (c) 2016 Sachin N; Licensed Apache 2.0 */
 ! function(a, b, c, d) {
     "use strict";
@@ -2481,11 +2445,11 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
     }, a.fn.lightGallery.modules = {}
 }(jQuery, window, document);
 /*! lightslider - v1.1.5 - 2015-10-31
- 
- 
+
+
  * https://github.com/sachinchoolur/lightslider
- 
- 
+
+
  * Copyright (c) 2015 Sachin N; Licensed MIT */
 ! function(a, b) {
     "use strict";
@@ -3794,17 +3758,17 @@ function(a, b) {
     }, a.fn.owlCarousel.Constructor.Plugins.Hash = c
 }(window.Zepto || window.jQuery, window, document);
 /*!
- 
- 
+
+
  * parallax.js v1.3.1 (http://pixelcog.github.io/parallax.js/)
- 
- 
+
+
  * @copyright 2015 PixelCog, Inc.
- 
- 
+
+
  * @license MIT (https://github.com/pixelcog/parallax.js/blob/master/LICENSE)
- 
- 
+
+
  */
 ! function(t, i, e, s) {
     function o(i, e) {

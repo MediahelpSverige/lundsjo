@@ -71,10 +71,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//import './src/js/fp-scripts.js'
 	var masonry = __webpack_require__(280);
-	
-	console.log(masonry);
 	
 	_imagesLoaded2.default.makeJQueryPlugin(_jquery2.default);
 	;
@@ -21489,7 +21486,7 @@
 	
 	
 	// module
-	exports.push([module.id, "#fullpage {\n  overflow: hidden; }\n  #fullpage img {\n    max-width: 100%;\n    height: auto; }\n\n.showcase-item {\n  float: left;\n  width: 25%; }\n\n.landing_section {\n  min-height: 100vh; }\n", "", {"version":3,"sources":["/./src/scss/src/scss/styles.scss"],"names":[],"mappings":"AAAA;EAEC,iBAAgB,EAOhB;EATD;IAKE,gBAAgB;IAChB,aAAa,EACd;;AAID;EACC,YAAW;EACX,WAAU,EACV;;AAED;EACI,kBAAkB,EACrB","file":"styles.scss","sourcesContent":["#fullpage {\r\n\r\n\toverflow:hidden;\r\n\r\nimg{\r\n  max-width: 100%;\r\n  height: auto;\r\n}\r\n\r\n}\r\n\r\n.showcase-item{\r\n\tfloat:left;\r\n\twidth:25%;\r\n}\r\n\r\n.landing_section {\r\n    min-height: 100vh;\r\n}\r\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "#fullpage {\n  overflow: hidden; }\n  #fullpage img {\n    max-width: 100%;\n    height: auto; }\n\ndiv#fullpage.showcase .page-wrap.section {\n  padding-bottom: 10vh; }\n\n.showcase-item {\n  float: left;\n  width: 25%; }\n\n.landing_section {\n  min-height: 100vh; }\n\ndiv#referenser .section-wrap {\n  margin-top: 90px; }\n\n@media (max-width: 600px) {\n  .side {\n    height: auto;\n    transition: initial;\n    position: fixed;\n    width: 100%;\n    max-width: initial;\n    background-color: white !important; } }\n", "", {"version":3,"sources":["/./src/scss/src/scss/styles.scss"],"names":[],"mappings":"AAAA;EAEC,iBAAgB,EAOhB;EATD;IAKE,gBAAgB;IAChB,aAAa,EACd;;AAID;EAGE,qBAAqB,EACrB;;AAIF;EACC,YAAW;EACX,WAAU,EACV;;AAED;EACI,kBAAkB,EACrB;;AAED;EAGE,iBAAiB,EACjB;;AAIF;EACA;IACI,aAAa;IACb,oBAAoB;IACpB,gBAAgB;IAChB,YAAY;IACZ,mBAAmB;IACnB,mCAAmC,EACtC,EAAA","file":"styles.scss","sourcesContent":["#fullpage {\r\n\r\n\toverflow:hidden;\r\n\r\nimg{\r\n  max-width: 100%;\r\n  height: auto;\r\n}\r\n\r\n}\r\n\r\ndiv#fullpage.showcase{\r\n\r\n\t.page-wrap.section{\r\n\t\tpadding-bottom: 10vh;\r\n\t}\r\n\r\n}\r\n\r\n.showcase-item{\r\n\tfloat:left;\r\n\twidth:25%;\r\n}\r\n\r\n.landing_section {\r\n    min-height: 100vh;\r\n}\r\n\r\ndiv#referenser{\r\n\r\n\t.section-wrap{\r\n\t\tmargin-top: 90px;\r\n\t}\r\n\r\n}\r\n\r\n@media (max-width: 600px){\r\n.side {\r\n    height: auto;\r\n    transition: initial;\r\n    position: fixed;\r\n    width: 100%;\r\n    max-width: initial;\r\n    background-color: white !important;\r\n}\r\n}\r\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
