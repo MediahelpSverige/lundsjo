@@ -33,7 +33,9 @@ switch ($hostname) {
     case 'aartslundsjo.mediahelpcrm.se':
         define('WP_ENV', 'staging');
         break;
-
+    case 'www.aartslundsjo.mediahelpcrm.se':
+        define('WP_ENV', 'staging');
+        break;
     case 'tmsab.se':
     default:
         define('WP_ENV', 'production');
