@@ -22,18 +22,9 @@ get_header();
 		<div class="grid_canvas">
 
 
-<?php $the_query = new WP_Query( array( 'post_type' => 'slide', 'posts_per_page' => -1)); ?>
 
 
-
-
-		<?php $thumb = wp_get_attachment_url(get_post_thumbnail_id($the_query->posts[0]->ID));
-
-
-
-		?>
-
-<div class="parallax-window" data-iosFix="false" data-parallax="scroll" data-natural-height="1941" data-natural-width="3000" data-image-src="<?php echo $thumb; ?>">
+<div class="parallax-window" data-iosFix="false" data-parallax="scroll" data-natural-height="1941" data-natural-width="3000" data-image-src="<?php the_post_thumbnail_url('full'); ?>">
 			<a href="#Portfolio"><i class="fa fa-angle-down"></i></a>
 		</div>
 	</div>
