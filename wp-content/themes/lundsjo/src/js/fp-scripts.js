@@ -352,7 +352,7 @@ var grid;
 
 
                   for (var i = 0; i < data.length; i++) {
-											console.log(data[i]);
+										
 
 											if(data[i].featured_media != 0) {
 
@@ -369,8 +369,6 @@ var grid;
 
 									}
 
-									      }
-
                     imagesLoaded( document.querySelector('.grid_canvas'), function( instance ) {
                       var msnry = new Masonry( '.grid_canvas', {
                                   // options
@@ -381,6 +379,9 @@ var grid;
                         });
 
 
+												}
+
+                }
 
 								//enable click on cats
 								$(document).on("click", ".sub-menu li a", function(event) {
