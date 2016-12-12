@@ -368,7 +368,8 @@ var grid;
 
 
 									}
-								}
+
+									      }
 
                     imagesLoaded( document.querySelector('.grid_canvas'), function( instance ) {
                       var msnry = new Masonry( '.grid_canvas', {
@@ -379,7 +380,7 @@ var grid;
                               })
                         });
 
-                }
+
 
 								//enable click on cats
 								$(document).on("click", ".sub-menu li a", function(event) {
