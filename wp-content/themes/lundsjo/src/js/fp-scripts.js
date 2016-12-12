@@ -354,6 +354,8 @@ var grid;
                   for (var i = 0; i < data.length; i++) {
 											console.log(data[i]);
 
+											if(data[i].featured_media != 0) {
+
 										if(data[i].better_featured_image.media_details.sizes.hasOwnProperty('large')){
 
 										$('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.media_details.sizes.large.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
@@ -366,6 +368,7 @@ var grid;
 
 
 									}
+								}
 
                     imagesLoaded( document.querySelector('.grid_canvas'), function( instance ) {
                       var msnry = new Masonry( '.grid_canvas', {
