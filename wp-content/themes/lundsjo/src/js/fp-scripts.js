@@ -5,6 +5,11 @@ var grid;
         var url = window.location.href + "wp-content/themes/lundsjo";
         var w = window.innerWidth;
 
+				$(document).on("click", ".sub-menu li a", function(event) {
+						event.preventDefault();
+						console.log(this);
+					});
+
         $(function() {
             $('a[href*="#"]:not([href="#"])').click(function() {
                 if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) {
@@ -347,7 +352,6 @@ var grid;
                   console.log(data);
 
                   for (var i = 0; i < data.length; i++) {
-                    console.log(data[i].better_featured_image.source_url);
 
 
 										if(data[i].better_featured_image.media_details.sizes.hasOwnProperty('large')){
@@ -375,7 +379,7 @@ var grid;
                 }
 
 								//enable click on cats
-								$(document).on("click", ".trigger-cat a", function(event) {
+								$(document).on("click", ".sub-menu li a", function(event) {
 										event.preventDefault();
 										var text = $(this).html().toLowerCase();
 										console.log(text);
@@ -383,7 +387,7 @@ var grid;
 										var urlcat = ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100&filter[category_name]='+ text +'';
 
 										if (text == 'allt') {
-											urlcat = ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100+';
+											urlcat = ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100';
 										}
 
 
@@ -398,11 +402,18 @@ var grid;
 													console.log(data);
 
 													for (var i = 0; i < data.length; i++) {
-
+														if(data[i].better_featured_image.media_details.sizes.hasOwnProperty('large')){
 
 														$('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.media_details.sizes.large.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
 
+													}else if (data[i].better_featured_image.media_details.hasOwnProperty('source_url')) {
 
+
+														$('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.media_details.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
+
+
+
+													}
 														imagesLoaded( document.querySelector('.grid_canvas'), function( instance ) {
 															var msnry = new Masonry( '.grid_canvas', {
 																					// options
