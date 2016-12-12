@@ -20,6 +20,7 @@ var grid;
             })
         });
 
+
         var current_slide = 0;
         var slides = $(".slideshow-items");
         var startingslide = $(slides[current_slide])[0];
@@ -31,6 +32,16 @@ var grid;
         var image = $(".parallax-slider").attr("src");
 
         $('.parallax-slider').imagesLoaded( function() {
+
+					$('.parallax-window').click( function(){
+
+						console.log('showgrid');
+
+						displayGrid(current_slide, slides, startingslide, startingSrc);
+						return false;
+
+					})
+
 
         	//setTimeout(,4000);
         	//Display the grid after 3 seconds
