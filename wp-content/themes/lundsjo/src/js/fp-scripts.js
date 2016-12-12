@@ -350,11 +350,12 @@ var grid;
                     console.log(data[i].better_featured_image.source_url);
 
 
-										if(data[i].better_featured_image.media_details.sizes.large.source_url != ''){
+										if(data[i].better_featured_image.media_details.sizes.hasOwnProperty('large')){
 
 										$('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.media_details.sizes.large.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
 
-									}else{
+									}else if (data[i].better_featured_image.media_details.hasOwnProperty('source_url')) {
+
 
 										$('.grid_canvas').append('<div class="project-item animated zoomIn"><a href="'+ data[i].link +'"><img src="'+data[i].better_featured_image.media_details.source_url+'"> <div class="title-bak"><h3 class="project-text">'+ data[i].title.rendered +'</h3></div></a></div>');
 
