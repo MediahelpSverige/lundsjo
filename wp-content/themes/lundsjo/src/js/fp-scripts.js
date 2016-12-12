@@ -399,7 +399,7 @@ var grid;
 												},
 												success: function(data) {
 
-													console.log(data);
+													console.log(data[i]);
 
 													for (var i = 0; i < data.length; i++) {
 														if(data[i].better_featured_image.media_details.sizes.hasOwnProperty('large')){
