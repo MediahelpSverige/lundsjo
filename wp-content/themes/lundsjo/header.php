@@ -18,8 +18,6 @@
 	 <meta name="theme-color" content="#FFFFFF" />
 
 
-    <link href="<?php bloginfo('template_url'); ?>/css/bootstrap.css" rel="stylesheet"/>
-
 
     <link href="<?php bloginfo('template_url'); ?>/style.css" rel="stylesheet"/>
 

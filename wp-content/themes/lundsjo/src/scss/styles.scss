@@ -1,4 +1,6 @@
+@import 'layout';
 @import 'header';
+
 
 #fullpage {
 
@@ -45,3 +47,7 @@ div#referenser{
     background-color: white !important;
 }
 }
+
+
+
+@import 'responsive';
