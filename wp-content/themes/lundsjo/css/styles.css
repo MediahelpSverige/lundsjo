@@ -1,0 +1,27 @@
+#fullpage {
+  overflow: hidden; }
+  #fullpage img {
+    max-width: 100%;
+    height: auto; }
+
+div#fullpage.showcase .page-wrap.section {
+  padding-bottom: 10vh; }
+
+.showcase-item {
+  float: left;
+  width: 25%; }
+
+.landing_section {
+  min-height: 100vh; }
+
+div#referenser .section-wrap {
+  margin-top: 90px; }
+
+@media (max-width: 600px) {
+  .side {
+    height: auto;
+    transition: initial;
+    position: fixed;
+    width: 100%;
+    max-width: initial;
+    background-color: white !important; } }
