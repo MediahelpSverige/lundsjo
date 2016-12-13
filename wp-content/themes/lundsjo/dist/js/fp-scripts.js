@@ -335,7 +335,21 @@ var grid;
 
         function displayGrid(current_slide, slides, grid) {
 
-            $(".parallax-window").fadeOut(1e3, function() {
+					//parallax Check
+
+					var element = []
+
+					if(document.querySelector('.parallax-mirror') != ''){
+						element = $('.parallax-mirror');
+					}else{
+						element = $('.parallax-window');
+					}
+
+					console.log(element);
+
+
+
+            element.fadeOut(1e3, function() {
 
               console.log(WP_API_Settings);
 
