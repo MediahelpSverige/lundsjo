@@ -23,12 +23,51 @@
 @media (max-width: 900px){
   body{
 
+    .section-wrap{
+      width: 100%;
+      margin-left: 0px;
+    }
+
 
 .project-item {
     width: calc(100%/3);
 }
 
   }
+}
+
+@media (max-width: 845px){
+
+  .side{
+
+    height: auto;
+    transition: initial;
+    position: fixed;
+    width: 100%;
+    max-width: initial;
+    background-color: white !important;
+
+    width: 100%;
+    position: fixed;
+
+      .side-menu ul {
+    display: none;
+    text-align: center;
+    top: 86px;
+    background-color: white;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    padding-left: 0px;
+    transition: 1s all ease;
+}
+
+  }
+
+
+
+  
+
 }
 @media (max-width: 550px){
 body{
