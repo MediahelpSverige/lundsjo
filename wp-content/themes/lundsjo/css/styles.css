@@ -1,3 +1,7 @@
+.small-col {
+  width: 15%;
+  max-width: 230px; }
+
 #fullpage {
   overflow: hidden; }
   #fullpage img {
@@ -25,3 +29,17 @@ div#referenser .section-wrap {
     width: 100%;
     max-width: initial;
     background-color: white !important; } }
+
+@media (max-width: 1100px) {
+  body nav ul ul.sub-menu a {
+    font-size: 12px; }
+  body .project-item {
+    width: calc(100%/4); } }
+
+@media (max-width: 900px) {
+  body .project-item {
+    width: calc(100%/3); } }
+
+@media (max-width: 550px) {
+  body .project-item {
+    width: calc(100%/2); } }

@@ -3,7 +3,7 @@ var node_dir = __dirname + '/node_modules';
 
 
 module.exports = {
-	entry: ['./app.js'],
+	entry: ['bootstrap-loader','./app.js'],
 
 	output: {
 		filename: 'bundle.js'

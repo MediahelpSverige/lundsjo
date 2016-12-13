@@ -28,9 +28,8 @@ get_header();
 	</div>
 </div>
 
-<div class="row">
-<div class="col-md-2 col-lg-2"></div>
-<div class="col-lg-10 col-md-10">
+<div class="col-sm-3 col-lg-2 col-md-2"></div>
+<div class="col-lg-10 col-md-10 col-sm-9">
 <div class="section-wrap">
 
 
@@ -73,7 +72,6 @@ foreach( $books as $book){ ?>
 </div>
 
 	</div>
-</div>
 </div>
 </div>
 </div>

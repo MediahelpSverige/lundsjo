@@ -1,5 +1,57 @@
-@media (max-width: 550px){
-  header{
-    
+@media (max-width: 1100px){
+  body{
+
+    nav{
+      ul{
+        padding-left: 20px;
+        ul.sub-menu{
+          padding-left: 15px;
+          a{
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  .project-item {
+      width: calc(100%/4);
   }
+
+
+}
+}
+
+@media (max-width: 900px){
+  body{
+
+
+.project-item {
+    width: calc(100%/3);
+}
+
+  }
+}
+@media (max-width: 550px){
+body{
+
+  header{
+
+
+
+  }
+
+  .side{
+    height: 90px;
+
+    .logo img{
+      width: auto;
+      max-height: 60px;
+      height: auto;
+    }
+  }
+
+  .project-item {
+      width: calc(100%/2);
+  }
+
+}
 }
