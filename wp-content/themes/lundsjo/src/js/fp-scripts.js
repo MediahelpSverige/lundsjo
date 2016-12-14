@@ -401,7 +401,7 @@ var grid;
 								$(document).on("click", ".sub-menu li a", function(event) {
 										event.preventDefault();
 										var text = $(this).html().toLowerCase();
-										console.log(text);
+										console.log(WP_API_Settings.root);
 
 										var urlcat = ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100&filter[category_name]='+ text +'';
 

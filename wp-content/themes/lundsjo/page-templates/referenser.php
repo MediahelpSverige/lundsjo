@@ -19,8 +19,8 @@ get_header();
 	</div>
 </div>
 
-	<div class="col-md-3 col-lg-2"></div>
-	<div class="col-md-9 col-lg-10">
+	<div class="col-sm-3 col-md-2 col-lg-2"></div>
+	<div class="col-sm-8 col-md-9 col-lg-9 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 
 	<div class="section-wrap">
 

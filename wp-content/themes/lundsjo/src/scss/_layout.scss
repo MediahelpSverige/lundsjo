@@ -2,6 +2,18 @@ body{
   .side{
     position: fixed;
   }
+
+  #referenser{
+  	ul{
+  		list-style: none;
+  		padding-left: 0px;
+  		font-weight: 300;
+
+  		h1,h2,h3,h4,h5{
+  			font-weight: initial;
+  		}
+  	}
+  }
 }
 
 .small-col{

@@ -1,0 +1,53 @@
+  .side-wrap{
+
+  .side-wrap-top{
+
+    padding: 10px;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(232, 232, 232, 0.77);
+    width: 100%;
+    padding-left: 5px;
+
+
+  }      
+
+    .side-menu{
+
+      ul#menu-sidmeny{
+
+        li{
+
+          &:first-of-type{
+            padding-top: 0px;
+          }
+
+      
+
+            a{
+                font-size: 14px;
+            }
+
+
+
+        ul.sub-menu{
+              padding-left: 15px;
+
+              li{
+
+              &:first-of-type{
+                padding-top: 10px;
+              }
+
+                a{
+                  font-size: 12px;
+                }
+              }
+        }
+  
+
+      }
+    }
+
+  }
+}
