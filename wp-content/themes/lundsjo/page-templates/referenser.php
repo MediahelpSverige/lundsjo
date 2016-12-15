@@ -1,4 +1,4 @@
-<?php /* template name: referenser */
+<?php
 
 get_header();
 

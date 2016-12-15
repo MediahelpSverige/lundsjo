@@ -38,7 +38,7 @@ get_header();
 				while ( have_posts() ) {
 					the_post(); ?>
 
-					<?php the_title('<h1>','</h1>');?>
+
 
 					<?php the_content();?>
 
@@ -51,25 +51,6 @@ get_header();
 
 			<?php } ?>
 
-			<div id="showcase-grid">
-
-
-			<?php $books = get_post_meta( $post->ID, 'grid', true );
-			if ($books != "") {
-
-foreach( $books as $book){ ?>
-
-	<div class="showcase-item" style="background-image:url('<?php echo wp_get_attachment_url($book['image']); ?>');">
-
-			<div class="showcase-desc"><h5 class="project-text">	<?php echo $book['text']; ?></h5></div>
-
-	</div>
-<?php
-			}
- } ?>
-
-</div>
-
 	</div>
 </div>
 </div>
@@ -77,34 +58,3 @@ foreach( $books as $book){ ?>
 
 
 <?php get_footer(); ?>
-
-
-<script>
-
-$(document).ready(function(){
-
-
-
-	var elem = document.querySelector('#showcase-grid');
-
-	console.log('elem', elem.innerHTML);
-
-	if (elem.innerHTML != "" ) {
-
-		imagesLoaded( document.querySelector('.showcase-grid'), function( instance ) {
-			var msnry = new Masonry( '.showcase-grid', {
-									// options
-									itemSelector: ".showcase-item",
-									fitWidth: true,
-									transitionDuration: "0.8s",
-									gutter:10
-							})
-				});
-	}
-
-	});
-
-
-
-
-</script>

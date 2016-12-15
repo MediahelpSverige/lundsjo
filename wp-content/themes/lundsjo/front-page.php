@@ -44,7 +44,7 @@ get_header();
 </div>
 
 
-<div id="Om" class="hur-section section fp-auto-height">
+<div id="Om" class="hur-section section fp-auto-height fp-section">
 <div class="row">
 	<div class="col-sm-3 col-md-2 col-lg-2"></div>
 	<div class="col-md-9 col-lg-9 col-sm-8 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
@@ -58,7 +58,7 @@ get_header();
 
 		</div>
 
-		<div class="section-wrap">
+		<div class="section-wrap" id="Kontakt">
 		<?php the_field('kontakt'); ?>
 
 		</div>

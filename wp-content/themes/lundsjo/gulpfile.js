@@ -34,6 +34,7 @@ gulp.task('sass', function() {
           errLogToConsole: true,
           outputStyle: 'expanded',
         }))
+        .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.init())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest("./css"))

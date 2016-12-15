@@ -335,17 +335,21 @@ var grid;
 
         function displayGrid(current_slide, slides, grid) {
 
-					//parallax Check
+					//parallax Check, check if on mobile
 
-					var element = []
+					var element = [];
+                    var elementNum = '50';
 
-					if(document.querySelector('.parallax-mirror') != ''){
-						element = $('.parallax-mirror');
-					}else{
+					if(document.querySelector('.parallax-mirror') == null){
 						element = $('.parallax-window');
+                        elementNum = 10;
+					}else{
+                        element = $('.parallax-mirror');
 					}
 
-					console.log(element);
+                    console.log(document.querySelector('.parallax-window'));
+
+					console.log('element-num',elementNum);
 
 
 
@@ -356,7 +360,7 @@ var grid;
 
               var ajax = $.ajax({
 
-                url: ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=50',
+                url: ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page='+elementNum+'',
                 dataType: 'json',
 
 
