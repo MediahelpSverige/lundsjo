@@ -4,7 +4,7 @@ Donate link: http://pledgie.com/campaigns/28307
 Tags: admin, attachment, attachments, ftp, gallery, image preview, image upload, images, import, importer, media, media library, schedule, sync, synchronize, upload, uploader
 Requires at least: 3.6.0
 Tested up to: 4.7
-Stable tag: 9.42
+Stable tag: 9.43
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,6 +139,9 @@ Register to media library from files that have been uploaded by FTP.
 
 == Changelog ==
 
+= 9.43 =
+Add author assignment to import.
+
 = 9.42 =
 Fixed problem of Exif Text display.
 
@@ -182,6 +185,7 @@ Change mediafromftpcmd.php.
 
 == Upgrade Notice ==
 
+= 9.43 =
 = 9.42 =
 = 9.41 =
 = 9.40 =

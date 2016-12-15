@@ -474,16 +474,12 @@ function wck_cfc_change_meta_message( $message, $value, $required_field ){
 
 /* function that check if a group name already exists */
 function wck_cfc_check_group_name_exists( $name ){
-	$args = array(
-		'posts_per_page' => -1,
-		'numberposts' => -1,
-		'post_type' => 'wck-meta-box',
-		'post_status' => 'any'
-	);
-	$meta_boxes = get_posts( $args );
-	if( !empty( $meta_boxes ) ){
-		foreach( $meta_boxes as $meta_box ){
-			$wck_cfc_args = get_post_meta( $meta_box->ID, 'wck_cfc_args', true );
+
+	$wck_meta_boxes_ids = get_option( 'wck_meta_boxes_ids', array() );
+
+	if( !empty( $wck_meta_boxes_ids ) ){
+		foreach( $wck_meta_boxes_ids as $wck_meta_boxes_id ){
+			$wck_cfc_args = get_post_meta( $wck_meta_boxes_id, 'wck_cfc_args', true );
 			if( !empty( $wck_cfc_args ) ){
 				/* make sure we compare them as slugs */
 				if( Wordpress_Creation_Kit::wck_generate_slug( $wck_cfc_args[0]['meta-name'] ) == Wordpress_Creation_Kit::wck_generate_slug( $name ) ){
@@ -497,16 +493,12 @@ function wck_cfc_check_group_name_exists( $name ){
 
 /* function that check if a field slug already exists */
 function wck_cfc_check_field_slug_exists( $name ){
-	$args = array(
-		'posts_per_page' => -1,
-		'numberposts' => -1,
-		'post_type' => 'wck-meta-box',
-		'post_status' => 'any'
-	);
-	$meta_boxes = get_posts( $args );
-	if( !empty( $meta_boxes ) ){
-		foreach( $meta_boxes as $meta_box ){
-			$wck_cfc_fields = get_post_meta( $meta_box->ID, 'wck_cfc_fields', true );
+
+	$wck_meta_boxes_ids = get_option( 'wck_meta_boxes_ids', array() );
+
+	if( !empty( $wck_meta_boxes_ids ) ){
+		foreach( $wck_meta_boxes_ids as $wck_meta_boxes_id ){
+			$wck_cfc_fields = get_post_meta( $wck_meta_boxes_id, 'wck_cfc_fields', true );
 			if( !empty( $wck_cfc_fields ) ){
 				foreach( $wck_cfc_fields as $wck_cfc_field ){
 					/* make sure to compare them as slugs */
@@ -1143,5 +1135,119 @@ function wck_cfc_process_unserialized_batch() {
 		// No more comments found, finish up
 		wp_redirect( admin_url( 'admin.php?page=wck-unserialized&wckbatch-complete=true' ) ); exit;
 	}
+}
+
+/* save all the metaboxes id's in an option when we first load the plugin and we don not have the option yet */
+add_action( 'init', 'wck_init_save_meta_boxes' );
+function wck_init_save_meta_boxes(){
+	$wck_meta_boxes_ids = get_option( 'wck_meta_boxes_ids', null );
+	if( is_null( $wck_meta_boxes_ids ) ){
+		$args = array(
+			'posts_per_page' => -1,
+			'numberposts' => -1,
+			'post_type' => 'wck-meta-box',
+			'post_status' => 'any'
+		);
+		$meta_boxes = get_posts( $args );
+		$wck_meta_boxes_ids = array();
+		if( !empty( $meta_boxes ) ){
+			foreach( $meta_boxes as $meta_box ){
+				$wck_meta_boxes_ids[] = $meta_box->ID;
+			}
+		}
+		update_option( 'wck_meta_boxes_ids', $wck_meta_boxes_ids );
+	}
+}
+
+/* when adding a new metabox or deleting one make the changes in the option */
+add_action( 'wp_insert_post', 'wck_cpt_save_meta_boxes_ids', 10, 1 );
+add_action( 'before_delete_post', 'wck_cpt_save_meta_boxes_ids' );
+function wck_cpt_save_meta_boxes_ids( $post_id ){
+	// We check if the global post type isn't ours and just return
+	global $post_type;
+	if ( $post_type != 'wck-meta-box' ) return;
+
+	$wck_meta_boxes_ids = get_option( 'wck_meta_boxes_ids', array() );
+	if( current_filter() == 'wp_insert_post' ){
+		if( !in_array( $post_id, $wck_meta_boxes_ids ) )
+			$wck_meta_boxes_ids[] = $post_id;
+	}
+
+	if( current_filter() == 'before_delete_post' ){
+		if( !empty( $wck_meta_boxes_ids ) ){
+			foreach( $wck_meta_boxes_ids as $key => $value ){
+				if( $value === $post_id )
+					unset( $wck_meta_boxes_ids[$key] );
+			}
+		}
+	}
+	
+	update_option( 'wck_meta_boxes_ids', $wck_meta_boxes_ids );
+}
+
+/**
+ * This filter makes sure that we do not read directly from the serialized field and we reconstruct it from the unserialized fields
+ * If there are no unserialized then we return the serialized information
+ */
+add_filter( "get_post_metadata", 'wck_serialized_update_from_unserialized', 10, 4 );
+function wck_serialized_update_from_unserialized( $replace, $object_id, $meta_key, $single){
+
+	/* if we don't have a meta_key don't do anything */
+	if( empty( $meta_key )  || $meta_key == 'wck_cfc_args' || $meta_key == 'wck_cfc_fields' )
+		return $replace;
+
+	$wck_meta_boxes_ids = get_option( 'wck_meta_boxes_ids', array() );
+
+	if( !empty( $wck_meta_boxes_ids ) ){
+		foreach( $wck_meta_boxes_ids as $wck_meta_boxes_id ){
+			$cfc_args = get_post_meta( $wck_meta_boxes_id, 'wck_cfc_args', true );
+
+			if( !empty( $cfc_args[0]['meta-name'] ) && $cfc_args[0]['meta-name'] == $meta_key ){
+
+				/* get all post meta for the post id like it is done in get_post_meta() function  */
+				$meta_cache = wp_cache_get($object_id, 'post_meta');
+				if ( !$meta_cache ) {
+					$meta_cache = update_meta_cache( 'post', array( $object_id ) );
+					$meta_cache = $meta_cache[$object_id];
+				}
+
+				$replace_with = array();
+
+				$cfc_fields = get_post_meta( $wck_meta_boxes_id, 'wck_cfc_fields', true );
+				if( !empty( $cfc_fields ) ){
+					foreach ( $cfc_fields as $cfc_field ){
+
+						/* check to see if we already have a meta name like this from the old structure to avoid conflicts */
+						$unserialized_key = Wordpress_Creation_Kit::wck_generate_unique_meta_name_for_unserialized_field( $object_id, Wordpress_Creation_Kit::wck_generate_slug( $cfc_field['field-title'] ), $cfc_args[0]['meta-name'] );
+
+						/* I will limit this to maximum 100 repeater field entries */
+						for( $i=0; $i<1000;$i++ ){
+							/* search for the unseralized form in the db */
+							if( $i == 0 )
+								$suffix = '';
+							else
+								$suffix = '_'.$i;
+
+							if ( isset($meta_cache[$unserialized_key.$suffix]) ) {
+								$unserialized_value = maybe_unserialize( $meta_cache[$unserialized_key.$suffix][0] );
+								$replace_with[$i][Wordpress_Creation_Kit::wck_generate_slug( $cfc_field['field-title'] )] = $unserialized_value;
+							}
+						}
+					}
+				}
+
+				if( !empty( $replace_with ) ){
+					$replace_with = array( array( $replace_with ) );
+
+					if ( $single )
+						return $replace_with[0];
+					else
+						return $replace_with;
+				}
+			}
+		}
+	}
+
+	return $replace;
 }
 ?>

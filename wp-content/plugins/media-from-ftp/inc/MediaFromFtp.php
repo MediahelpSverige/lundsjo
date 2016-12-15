@@ -1075,13 +1075,88 @@ class MediaFromFtp {
 		return $array;
 	}
 
+
 	/* ==================================================
 	* for Media Library Import
 	* @param	string	$filename
+	* @return	array	$authors
+	* @since	9.43
+	*/
+	function author_select($filename) {
+
+		$scriptname = admin_url('admin.php?page=mediafromftp-import');
+
+		$s = @file_get_contents($filename);
+		$controlCode = array("\x00", "\x01", "\x02", "\x03", "\x04", "\x05", "\x06", "\x07", "\x08", "\x0b", "\x0c", "\x0e", "\x0f");
+		$s = str_replace($controlCode, '', $s);
+		$xml = simplexml_load_string($s);
+
+		$authors = array();
+		$namespaces = $xml->getDocNamespaces();
+		foreach ( $xml->xpath('/rss/channel/wp:author') as $author_arr ) {
+			$a = $author_arr->children( $namespaces['wp'] );
+			$authors[] = array(
+							'author_login' => (string) $a->author_login,
+							'author_display_name' => (string) $a->author_display_name,
+							);
+		}
+
+
+		$form_select = NULL;
+		$count = 0;
+		if ( current_user_can( 'manage_options' ) )  {
+			$blogusers = get_users();
+			foreach ( $authors as $key => $value) {
+				++$count;
+				$form_select .= '<div style="display: block; padding: 5px 10px">'.$count.'.'.__('Import author:', 'media-from-ftp').'<strong>'.$value['author_display_name'].'('.$value['author_login'].')'.'</strong></div>';
+				$form_select .= '<div style="display: block; padding: 5px 30px">'.__('Assign posts to an existing user:', 'media-from-ftp').'<select name="'.$value['author_login'].'">';
+				$form_select .= '<option value="-1" select>'.__('Select').'</option>';
+				foreach ( $blogusers as $user ) {
+					$form_select .= '<option value="'.$user->ID.'">'.$user->display_name.'('.$user->user_login.')</option>';
+				}
+				$form_select .= '</select></div>';
+			}
+			$current_user = wp_get_current_user();
+			$current_user_html = '<strong>'.$current_user->display_name.'('.$current_user->user_login.')</strong>';
+			$form_select .= '<div style="display: block; padding: 10px 0px">'.sprintf(__('If not selected, assign posts to %1$s.', 'media-from-ftp'), $current_user_html).'</div>';
+		} else {
+			$user = wp_get_current_user();
+			foreach ( $authors as $key => $value) {
+				++$count;
+				$form_select .= '<div style="display: block; padding: 5px 10px">'.$count.'.'.__('Import author:', 'media-from-ftp').'<strong>'.$value['author_display_name'].'('.$value['author_login'].')'.'</strong></div>';
+				$current_user_html = '<strong>'.$user->display_name.'('.$user->user_login.')</strong>';
+				$form_select .= '<div style="display: block; padding: 5px 30px">'.sprintf(__('Assign posts to %1$s', 'media-from-ftp'), $current_user_html).'</div>';
+
+			}
+		}
+		$button_value = __('Apply');
+
+$author_form = <<<MEDIAFROMFTP_AUTHOR_SELECT
+
+<!-- BEGIN: Media from FTP Media Library Import -->
+<form method="post" action="$scriptname">
+$form_select
+<div style="display: block; padding: 20px 0px"><input type="submit" class="button" name="select_author" value="$button_value" /></div>
+<input type="hidden" name="mediafromftp_select_author" value="1" />
+<input type="hidden" name="mediafromftp_xml_file" value="$filename" />
+</form>
+
+<!-- END: Media from FTP Media Library Import -->
+
+MEDIAFROMFTP_AUTHOR_SELECT;
+
+		return $author_form;
+
+	}
+
+	/* ==================================================
+	* for Media Library Import
+	* @param	string	$filename
+	* @param	array	$select_author
 	* @return	string	$add_js
 	* @since	9.40
 	*/
-	function make_object($filename) {
+	function make_object($filename, $select_author) {
 
 		$s = @file_get_contents($filename);
 		$controlCode = array("\x00", "\x01", "\x02", "\x03", "\x04", "\x05", "\x06", "\x07", "\x08", "\x0b", "\x0c", "\x0e", "\x0f");
@@ -1149,11 +1224,19 @@ class MediaFromFtp {
 		foreach ($data as $key => $value) {
 			if ($value['post_type'] === 'attachment') {
 				$file = MEDIAFROMFTP_PLUGIN_UPLOAD_DIR.'/'.$value['postmeta_wp_attached_file_value'];
-				$user = wp_get_current_user();
 				$filetype = wp_check_filetype( basename( $file ), null );
+
+				$user = wp_get_current_user();
+				$loginuser = $user->ID;
+				foreach ( $select_author as $authorkey => $authorvalue ) {
+					if ( $value['creator'] === $authorkey) {
+						$loginuser = $authorvalue;
+					}
+				}
+
 				$db_array[$count] = array(
 								'ID'						=>	$value['post_id'],
-								'post_author'				=>	$user->ID,
+								'post_author'				=>	$loginuser,
 								'post_date'					=>	$value['post_date'],
 								'post_date_gmt'				=>	$value['post_date_gmt'],
 								'post_content'				=>	$value['content_encoded'],

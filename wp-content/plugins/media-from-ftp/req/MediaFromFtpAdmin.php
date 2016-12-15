@@ -113,12 +113,25 @@ class MediaFromFtpAdmin {
 	 */
 	function load_custom_wp_admin_style2() {
 		if ($this->is_my_plugin_screen2()) {
-			if ( !empty($_FILES['filename']['name']) ) {
-				$filename = $_FILES['filename']['tmp_name'];
-				include_once MEDIAFROMFTP_PLUGIN_BASE_DIR.'/inc/MediaFromFtp.php';
-				$mediafromftp = new MediaFromFtp();
-				echo $mediafromftp->make_object($filename);
-				unset($mediafromftp);
+			if ( !empty($_POST['mediafromftp_select_author']) && !empty($_POST['mediafromftp_xml_file']) ) {
+
+				if ( is_file($_POST['mediafromftp_xml_file']) ) {
+					$select_author = array();
+					foreach (array_keys($_POST) as $key) {
+						if ( $key === 'select_author' || $key === 'mediafromftp_select_author' || $key === 'mediafromftp_xml_file' ) {	// skip
+						} else {
+							if ( $_POST[$key] <> -1 ) {
+								$select_author[$key] = $_POST[$key];
+							}
+						}
+					}
+					$filename = $_POST['mediafromftp_xml_file'];
+					include_once MEDIAFROMFTP_PLUGIN_BASE_DIR.'/inc/MediaFromFtp.php';
+					$mediafromftp = new MediaFromFtp();
+					echo $mediafromftp->make_object($filename, $select_author);
+					unset($mediafromftp);
+					unlink($filename);
+				}
 			}
 		}
 	}
@@ -1123,9 +1136,22 @@ COMMANDLINESET2;
 		$upload_dir_html = '<span style="color: red;">'.MEDIAFROMFTP_PLUGIN_UPLOAD_PATH.'</span>';
 		?>
 		<h3><?php echo sprintf(__('In uploads directory(%1$s), that you need to copy the file to the same state as the import source by FTP.', 'media-from-ftp'), $upload_dir_html); ?></h3>
+		<hr>
 		<?php
 		if ( !empty($_FILES['filename']['name']) ) {
+			$filename = $_FILES['filename']['tmp_name'];
+			$name = basename($filename);
+			move_uploaded_file($filename, MEDIAFROMFTP_PLUGIN_TMP_DIR.'/'.$name);
+
+			include_once MEDIAFROMFTP_PLUGIN_BASE_DIR.'/inc/MediaFromFtp.php';
+			$mediafromftp = new MediaFromFtp();
 			?>
+			<h4><?php _e('Assign Authors', 'media-from-ftp'); ?></h4>
+			<?php
+			echo $mediafromftp->author_select(MEDIAFROMFTP_PLUGIN_TMP_DIR.'/'.$name);
+		} else if ( !empty($_POST['mediafromftp_select_author']) && !empty($_POST['mediafromftp_xml_file']) ) {
+			?>
+			<h4><?php _e('Ready to import. Press the following button to start the import.', 'media-from-ftp'); ?></h4>
 			<form method="post" id="medialibraryimport_ajax_update">
 				<input type="submit" class="button-primary button-large" value="<?php _e('Import'); ?>" />
 			</form>
@@ -1133,7 +1159,7 @@ COMMANDLINESET2;
 		} else {
 			?>
 			<form method="post" action="<?php echo $scriptname; ?>" enctype="multipart/form-data">
-			<div><?php _e('Select File'); ?>[WordPress eXtended RSS (WXR)(.xml)]</div>
+			<h4><?php _e('Select File'); ?>[WordPress eXtended RSS (WXR)(.xml)]</h4>
 			<div><input name="filename" type="file" size="80" /></div>
 			<div><input type="submit" class="button" name="submit" value="<?php _e('File Load', 'media-from-ftp'); ?> " /></div>
 			</form>

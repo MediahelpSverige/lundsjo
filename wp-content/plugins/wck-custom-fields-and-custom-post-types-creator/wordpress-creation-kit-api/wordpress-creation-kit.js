@@ -93,9 +93,6 @@ function addMeta(value, id, nonce){
 					
 					jQuery('#container_'+value).replaceWith(response);
 					
-					/* set width of strong label */
-					wck_set_to_widest('strong', '#container_'+value );
-					
 					jQuery('.mb-table-container tbody td').css('width', function(){ return jQuery(this).width() });
 					
 					if( !jQuery( '#'+value ).hasClass('single') )
@@ -104,8 +101,7 @@ function addMeta(value, id, nonce){
 					/* restore the add form to the original values */					
 					if( !jQuery( '#'+value ).hasClass('single') ){
 						jQuery.post( wckAjaxurl ,  { action:"wck_add_form"+meta, meta:value, id:id }, function(response) {			
-							jQuery( '#'+value ).replaceWith( response );							
-							wck_set_to_widest( '.field-label', '#'+value );
+							jQuery( '#'+value ).replaceWith( response );
 						});
 					}
 						
@@ -159,9 +155,6 @@ function removeMeta(value, id, element_id, nonce){
 				/* refresh the list */
 				jQuery.post( wckAjaxurl ,  { action:"wck_refresh_list"+meta, meta:value, id:id}, function(response) {	
 					jQuery('#container_'+value).replaceWith(response);
-					
-					/* set width of strong label */
-					wck_set_to_widest('strong', '#container_'+value );
 					
 					jQuery('.mb-table-container tbody td').css('width', function(){ return jQuery(this).width() });
 					
@@ -220,9 +213,6 @@ function mb_sortable_elements() {
 					jQuery.post( wckAjaxurl ,  { action:"wck_refresh_list"+meta, meta:value, id:id}, function(response) {
 							jQuery('#container_'+value).replaceWith(response);
 							
-							/* set width of strong label */
-							wck_set_to_widest('strong', '#container_'+value );
-							
 							jQuery('.mb-table-container tbody td').css('width', function(){ return jQuery(this).width() });
 							
 							mb_sortable_elements();
@@ -267,9 +257,6 @@ function showUpdateFormMeta(value, id, element_id, nonce){
 		jQuery.post( wckAjaxurl ,  { action:"wck_show_update"+meta, meta:value, id:id, element_id:element_id, _ajax_nonce:nonce}, function(response) {	
 				//jQuery('#container_'+value+' #element_'+element_id).append(response);
 				jQuery(response).insertAfter('#container_'+value+' > tbody > #element_'+element_id);
-				
-				/* set width of field-label */
-				wck_set_to_widest('.field-label', '#update_container_' + value + '_' + element_id );				
 				
 				jQuery('#container_'+value).parent().css('opacity','1');
 				jQuery('#mb-ajax-loading').remove();
@@ -381,9 +368,6 @@ function updateMeta(value, id, element_id, nonce){
 				jQuery.post( wckAjaxurl ,  { action:"wck_refresh_entry"+meta, meta:value, id:id, element_id:element_id}, function(response) {	
 					jQuery('#container_'+value+' #element_'+element_id).replaceWith(response);
 					
-					/* set width of strong label */
-					wck_set_to_widest('strong', '#container_'+value+' #element_'+element_id );
-					
 					jQuery('.mb-table-container tbody td').css('width', function(){ return jQuery(this).width() });
 					
 					if( jQuery( '#container_' + value + " tbody" ).hasClass('ui-sortable') )
@@ -417,32 +401,39 @@ jQuery(function(){
 });
 
 /* Set width for listing "label" equal to the widest */
-jQuery( function(){	
-	jQuery('.mb-table-container').each(function(){
-		wck_set_to_widest( 'strong', jQuery(this) );		
-	});	
-	
-	jQuery('.mb-list-entry-fields').each(function(){
-		wck_set_to_widest( '.field-label', jQuery(this) );		
-	});	
-	
+jQuery( function(){
 	jQuery('.wck-post-box').css( {visibility: 'visible', height: 'auto'} );
 });
 
 function wck_set_to_widest( element, parent ){
-	if( jQuery( element, parent).length != 0 ){		
-		var widest = null;
-		jQuery( element, parent).each(function() {
-		  if (widest == null)
-			widest = jQuery(this);
-		  else
-		  if ( jQuery(this).width() > widest.width() )
-			widest = jQuery(this);
-		});
-		
-		jQuery(element, parent).css( {display: 'inline-block', width: widest.width()+2, paddingRight: '5px'} );
+	if( element == '.field-label' ){
+		if( jQuery( "#" + parent + ' ' + element ).length != 0 ){
+			var widest = null;
+			jQuery( "#" + parent + ' ' + element ).each(function() {
+				if (widest == null)
+					widest = jQuery(this);
+				else
+				if ( jQuery(this).width() > widest.width() )
+					widest = jQuery(this);
+			});
+
+			jQuery( "#" + parent ).append("<style type='text/css'>#"+ parent +" .field-label, #container_"+ parent +" .field-label{display:inline-block;padding-right:5px;width:"+ ( parseInt( widest.width() ) + parseInt( 2 ) ) +"px;}</style>");
+		}
 	}
-	else return;
+	else if( element == 'strong' ){
+		if( jQuery( "#container_" + parent + " #element_0 " + element ).length != 0 ){
+			var widest = null;
+			jQuery( "#container_" + parent + " #element_0 " + element ).each(function() {
+				if (widest == null)
+					widest = jQuery(this);
+				else
+				if ( jQuery(this).width() > widest.width() )
+					widest = jQuery(this);
+			});
+
+			jQuery( "#container_" + parent ).append("<style type='text/css'>#container_"+ parent +" strong{display:inline-block;padding-right:5px;width:"+ ( parseInt( widest.width() ) + parseInt( 2 ) ) +"px;}</style>");
+		}
+	}
 }
 
 

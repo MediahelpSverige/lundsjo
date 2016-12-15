@@ -407,6 +407,7 @@ class Wordpress_Creation_Kit{
                 <?php } ?>
 			</ul>
 		</div>
+		<script>wck_set_to_widest( '.field-label', '<?php echo $meta ?>' );</script>
 		<?php
 	}
 	
@@ -572,7 +573,14 @@ class Wordpress_Creation_Kit{
 									$details['type'] = 'nested-repeater';
 
 				if( $details['type'] != 'html' ) {
-					$list .= '<li class="row-'. esc_attr( Wordpress_Creation_Kit::wck_generate_slug( $details['title'], $details ) ) .'" data-type="'. $details['type'] .'"><strong>'. $details['title'] . ( $details['type'] != 'heading' ? ':' : '' ) .' </strong>'. $display_value .' </li>';
+					$list .= '<li class="row-'. esc_attr( Wordpress_Creation_Kit::wck_generate_slug( $details['title'], $details ) ) .'" data-type="'. $details['type'] .'">';
+					if( $details['type'] != 'heading' ) {
+						$list .= '<strong>' . $details['title'] . ':' . ' </strong>';
+					}
+					else{
+						$list .= '<h5>' . $details['title'] . ' </h5>';
+					}
+					$list .= $display_value .' </li>';
 				}
 
 				$list = apply_filters( "wck_after_listed_{$meta}_element_{$j}", $list, $element_id, $value );
@@ -597,6 +605,10 @@ class Wordpress_Creation_Kit{
 				$list .= wck_nr_handle_repeaters( $meta, $id, $fields, $results, $element_id );
 			}
 
+		}
+
+		if( $element_id === 0 ){
+			$list .= "<script>wck_set_to_widest( 'strong', '". $meta ."' );</script>";
 		}
 		
 		$list .= '</td>';				

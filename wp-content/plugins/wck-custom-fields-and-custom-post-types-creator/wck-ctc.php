@@ -77,6 +77,8 @@ function wck_ctc_create_box(){
 			array( 'type' => 'select', 'title' => __( 'Show UI', 'wck' ), 'slug' => 'show-ui', 'options' => array( 'false', 'true' ), 'default' => 'true', 'description' => __( 'Whether to generate a default UI for managing this post type.', 'wck' ) ),
 			array( 'type' => 'select', 'title' => __( 'Show Tagcloud', 'wck' ), 'slug' => 'show-tagcloud', 'options' => array( 'false', 'true' ), 'default' => 'true', 'description' => __( 'Whether to allow the Tag Cloud widget to use this taxonomy.', 'wck' ) ),
 			array( 'type' => 'select', 'title' => __( 'Show Admin Column', 'wck' ), 'slug' => 'show-admin-column', 'options' => array( 'false', 'true' ), 'default' => 'false', 'description' => __( 'Whether to allow automatic creation of taxonomy columns on associated post-types.', 'wck' ) ),
+			array( 'type' => 'select', 'title' => __( 'Sortable Admin Column', 'wck' ), 'slug' => 'sortable-admin-column', 'options' => array( 'false', 'true' ), 'default' => 'false', 'description' => __( 'Whether to make the columns sortable or not. WARNING: on a large number of posts the performance can be severely affected', 'wck' ) ),
+			array( 'type' => 'select', 'title' => __( 'Show in Quick Edit', 'wck' ), 'slug' => 'show-in-quick-edit', 'options' => array( 'false', 'true' ), 'default' => 'false', 'description' => __( 'Whether to show the taxonomy in the quick/bulk edit panel.', 'wck' ) ),
 			array( 'type' => 'select', 'title' => __( 'Show in REST API', 'wck'), 'slug' => 'show-in-rest', 'options' => array( 'false', 'true'), 'default' => 'false', 'description' => __('Make this taxonomy available via WP REST API ', 'wck' ) )
 		);
 
@@ -156,12 +158,38 @@ function wck_ctc_create_taxonomy(){
                 $args['show_admin_column'] = $ct['show-admin-column'] == 'false' ? false : true;
             }
 
+            if( !empty( $ct['show-in-quick-edit'] ) ){
+                $args['show_in_quick_edit'] = $ct['show-in-quick-edit'] == 'false' ? false : true;
+            }
+
             if( !empty( $ct['attach-to'] ) )
                 $object_type = explode( ', ', $ct['attach-to'] );
             else
                 $object_type = '';
 
             register_taxonomy( $ct['taxonomy'], $object_type, apply_filters( 'wck_ctc_register_taxonomy_args', $args, $ct['taxonomy'] ) );
+
+            if( !empty( $object_type ) && !empty( $args['show_admin_column'] ) && $args['show_admin_column'] == true && !empty( $ct['sortable-admin-column'] ) && $ct['sortable-admin-column'] === 'true' ){
+                foreach( $object_type as $post_type ) {
+                    add_filter("manage_edit-{$post_type}_sortable_columns", create_function('$columns', '$columns["taxonomy-' . $ct["taxonomy"] . '"] = "taxonomy-' . $ct["taxonomy"] . '";return $columns;'));
+                    add_filter( 'posts_clauses', create_function( '$clauses, $wp_query', 'global $wpdb;
+	                if ( is_admin() && isset( $wp_query->query[\'orderby\'] ) && \'taxonomy-'.$ct["taxonomy"].'\' == $wp_query->query[\'orderby\'] ) {
+
+		                $clauses[\'join\'] .= <<<SQL
+LEFT OUTER JOIN {$wpdb->term_relationships} ON {$wpdb->posts}.ID={$wpdb->term_relationships}.object_id
+LEFT OUTER JOIN {$wpdb->term_taxonomy} USING (term_taxonomy_id)
+LEFT OUTER JOIN {$wpdb->terms} USING (term_id)
+SQL;
+
+                        $clauses[\'where\'] .= " AND (taxonomy = \''.$ct["taxonomy"].'\' OR taxonomy IS NULL)";
+                        $clauses[\'groupby\'] = "object_id";
+                        $clauses[\'orderby\']  = "GROUP_CONCAT({$wpdb->terms}.name ORDER BY name ASC) ";
+                        $clauses[\'orderby\'] .= ( \'ASC\' == strtoupper( $wp_query->get(\'order\') ) ) ? \'ASC\' : \'DESC\';
+                    }
+                
+                    return $clauses;' ), 10, 2 );
+                }
+            }
         }
     }
 }
@@ -231,7 +259,7 @@ function wck_ctc_form_wrapper_start(){
     echo '<li id="ctc-advanced-options-container" style="display:none;"><ul>';
 }
 
-add_action( "wck_after_add_form_wck_ctc_element_25", 'wck_ctc_form_wrapper_end' );
+add_action( "wck_after_add_form_wck_ctc_element_27", 'wck_ctc_form_wrapper_end' );
 function wck_ctc_form_wrapper_end(){
     echo '</ul></li>';
 }
@@ -258,7 +286,7 @@ function wck_ctc_update_form_wrapper_start( $form, $i ){
     return $form;
 }
 
-add_filter( "wck_after_update_form_wck_ctc_element_25", 'wck_ctc_update_form_wrapper_end', 10, 2 );
+add_filter( "wck_after_update_form_wck_ctc_element_27", 'wck_ctc_update_form_wrapper_end', 10, 2 );
 function wck_ctc_update_form_wrapper_end( $form, $i ){
     $form .=  '</ul></li>';
     return $form;
@@ -287,7 +315,7 @@ function wck_ctc_display_adv_wrapper_start( $form, $i ){
     return $form;
 }
 
-add_filter( "wck_after_listed_wck_ctc_element_25", 'wck_ctc_display_adv_wrapper_end', 10, 2 );
+add_filter( "wck_after_listed_wck_ctc_element_27", 'wck_ctc_display_adv_wrapper_end', 10, 2 );
 function wck_ctc_display_adv_wrapper_end( $form, $i ){
     $form .=  '</ul></li>';
     return $form;
