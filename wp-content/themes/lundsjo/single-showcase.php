@@ -59,11 +59,10 @@ get_header();
 
 foreach( $books as $book){ ?>
 
-	<div class="showcase-item">
-		<a href="<?php the_permalink(); ?>">
-			<img src="<?php echo wp_get_attachment_url($book['image']); ?>">
-			<div class="title-bak"><h3 class="project-text">	<?php echo $book['text']; ?></h3></div>
-		</a>
+	<div class="showcase-item" style="background-image:url('<?php echo wp_get_attachment_url($book['image']); ?>');">
+
+			<div class="showcase-desc"><h5 class="project-text">	<?php echo $book['text']; ?></h5></div>
+
 	</div>
 <?php
 			}
