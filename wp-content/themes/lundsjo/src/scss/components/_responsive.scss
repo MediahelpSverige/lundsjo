@@ -90,7 +90,7 @@ body{
 
   .side{
 
-    height: auto;
+    height: 120px;
     transition: initial;
     position: fixed;
     width: 100%;
@@ -118,6 +118,10 @@ body{
     transition: 1s all ease;
 }
 
+  }
+
+  #fullpage{
+    margin-top: 120px; 
   }
 
 }
@@ -153,13 +157,21 @@ body{
   }
 
   .side{
-    height: 90px;
+    height: 80px;
+
+    .side-wrap .side-wrap-top{
+      padding:5px!important;
+    }
 
     .logo img{
       width: auto;
       max-height: 60px;
       height: auto;
     }
+  }
+
+    #fullpage{
+    margin-top: 40px; 
   }
 
   .project-item {
