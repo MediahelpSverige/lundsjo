@@ -1,5 +1,6 @@
-@import 'layout';
 @import 'header';
+
+@import 'layout';
 
 
 
@@ -20,6 +21,10 @@ img{
 
 }
 
+
+
+
+
 h3.project-text{
 	color: black;
 }
@@ -32,10 +37,6 @@ div#fullpage.showcase{
 
 }
 
-.showcase-item{
-	float:left;
-	width:25%;
-}
 
 .landing_section {
     min-height: 100vh;

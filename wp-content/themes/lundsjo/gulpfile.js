@@ -1,5 +1,7 @@
 var gulp = require('gulp');
+var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
+var gutil = require('gulp-util');
 var browserSync = require('browser-sync').create();
 
 gulp.task('default', function() {
@@ -16,7 +18,7 @@ gulp.task('serve', ['sass', 'js'], function() {
       port: 8080
   });
 
-  gulp.watch("./src/scss/*.scss", ['sass']);
+  gulp.watch("./src/scss/components/*.scss", ['sass']);
   gulp.watch("./src/js/*.js", ['js']);
   gulp.watch("./css/*.css").on('change', browserSync.reload);
   gulp.watch("./*.html").on('change', browserSync.reload);
@@ -26,8 +28,14 @@ gulp.task('serve', ['sass', 'js'], function() {
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
-    return gulp.src("./src/scss/*.scss")
-        .pipe(sass())
+    return gulp.src("./src/scss/**/*.scss")
+        .pipe(sass({
+          includePaths: ['./src/scss/components/'],
+          errLogToConsole: true,
+          outputStyle: 'expanded',
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest("./css"))
         .pipe(browserSync.stream());
 });
