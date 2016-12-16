@@ -415,7 +415,7 @@ console.log(data);
                             dataType: 'json',
                             beforeSend:function() {
                                 $('.project-item').removeClass('animated zoomIn');
-                                $('.project-item').addClass('animated fadeOut');
+                                $('.project-item').addClass('animated zoomOut');
                                 $('.project-item').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 
                                  
