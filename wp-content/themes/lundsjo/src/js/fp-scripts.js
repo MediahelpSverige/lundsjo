@@ -426,7 +426,14 @@ console.log(data);
                             url:''+WP_API_Settings.root +'/wp-json/wp/v2/categories?slug='+newText+'',
                             dataType: 'json',
                             beforeSend:function() {
-                                $(".landing_section").find(".grid_canvas").empty()
+                                $('.project-item').removeClass('animated zoomIn');
+                                $('.project-item').addClass('animated fadeOut');
+                                $('.project-item').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+
+                                 $(".landing_section").find(".grid_canvas").empty()
+
+                                })
+                                
                             }
                         })
 
