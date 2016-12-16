@@ -418,7 +418,7 @@ console.log(data);
                                 $('.project-item').addClass('animated fadeOut');
                                 $('.project-item').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 
-                                 $(".landing_section").find(".grid_canvas").empty()
+                                 
 
                                 })
                                 
@@ -445,7 +445,7 @@ console.log(data);
                             url: urlcat,
                             dataType: 'json',
                             beforeSend: function() {
-                                //$(".landing_section").find(".grid_canvas").empty()
+                                $(".landing_section").find(".grid_canvas").empty()
                             },
                             success: function(data) {
 
