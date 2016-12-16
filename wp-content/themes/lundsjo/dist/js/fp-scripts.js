@@ -5,10 +5,8 @@ $(document).ready(function() {
     var url = window.location.href + "wp-content/themes/lundsjo";
     var w = window.innerWidth;
 
-    $(document).on("click", ".sub-menu li a", function(event) {
-        event.preventDefault();
-        console.log(this);
-    });
+    console.log('fp-script');
+
 
     $(function() {
         $('a[href*="#"]:not([href="#"])').click(function() {
@@ -404,7 +402,7 @@ console.log(data);
                 var catId = 0;
 
                 //enable click on cats
-                $(document).on("click", ".sub-menu li > a", function(event) {
+                //$(document).on("click", ".sub-menu li > a", function(event) {
                     event.preventDefault();
                     console.log('click');
                     var translate_re = /[öäüÖÄÜ]/g;

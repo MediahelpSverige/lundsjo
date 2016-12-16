@@ -5,9 +5,9 @@ $(document).ready(function() {
     var url = window.location.href + "wp-content/themes/lundsjo";
     var w = window.innerWidth;
 
-    $(document).on("click", ".sub-menu li a", function(event) {
+    $(".sub-menu li a").on("click", function(event) {
         event.preventDefault();
-        console.log(this);
+        
     });
 
     $(function() {
@@ -36,6 +36,9 @@ $(document).ready(function() {
 
     var image = $(".parallax-slider").attr("src");
 
+    var paraClicked = false;
+
+    var gridTimer = setTimeout(function(){ displayGrid(current_slide, slides, startingslide, startingSrc); }, 3000);
 
 
     $('.parallax-window').click( function(){
@@ -44,30 +47,15 @@ $(document).ready(function() {
 
         displayGrid(current_slide, slides, startingslide, startingSrc);
 
+        paraClicked = true;
+
+        clearTimeout(gridTimer);
+
 
     })
 
 
-    //setTimeout(,4000);
-    //Display the grid after 3 seconds
-    setTimeout(function(){ displayGrid(current_slide, slides, startingslide, startingSrc); }, 3000);
 
-
-
-
-
-
-    if (w < 900 && w > 600) {
-
-        grid = true;
-
-
-    } else {
-
-        grid = true;
-
-
-    }
     $(window).resize(function() {
 
     });
@@ -404,7 +392,7 @@ console.log(data);
                 var catId = 0;
 
                 //enable click on cats
-                $(document).on("click", ".sub-menu li > a", function(event) {
+                $(".sub-menu li a").on("click", function(event) {
                     event.preventDefault();
                     console.log('click');
                     var translate_re = /[öäüÖÄÜ]/g;
