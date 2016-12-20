@@ -28,7 +28,7 @@ get_header();
 			<a href="#Portfolio"><i class="fa fa-angle-down"></i></a>
 		</div>
 	</div>
-		<div class="side col-sm-3 col-lg-2 col-md-2">
+		<div class="side col-lg-2 col-md-2">
 			<div class="side-wrap">
 				<div class="side-wrap-top">
 					<div class="logo"><a data-menuanchor="Hem" href="#Hem"><img src="<?php bloginfo('template_url');?>/img/logga.png"></a></div>
@@ -46,8 +46,8 @@ get_header();
 
 <div id="Om" class="hur-section section fp-auto-height fp-section">
 <div class="row">
-	<div class="col-sm-3 col-md-2 col-lg-2"></div>
-	<div class="col-md-9 col-lg-9 col-sm-8 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+	<div class="col-md-2 col-lg-2"></div>
+	<div class="col-md-9 col-lg-9 col-md-offset-1 col-lg-offset-1">
 		<div class="section-wrap">
 		<?php the_field('hur_vi_arbetar'); ?>
 

@@ -4,7 +4,7 @@ get_header();
 
 <div id="fullpage" class="showcase">
 	<div  class="page-wrap section">
-		<div class="side col-sm-3 col-lg-2 col-md-2">
+		<div class="sidecol-lg-2 col-md-2">
 			<div class="side-wrap">
 				<div class="side-wrap-top">
 					<div class="logo"><a href="<?php bloginfo('url'); ?>"><img src="<?php bloginfo('template_url');?>/img/logga.png"></a></div>
@@ -28,8 +28,8 @@ get_header();
 	</div>
 </div>
 
-<div class="col-sm-3 col-md-2 col-lg-2"></div>
-<div class="col-md-9 col-lg-9 col-sm-8 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+<div class="col-md-2 col-lg-2"></div>
+<div class="col-md-9 col-lg-9 col-sm-8 col-md-offset-1 col-lg-offset-1">
 <div class="section-wrap">
 
 
