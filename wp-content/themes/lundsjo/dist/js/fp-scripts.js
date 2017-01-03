@@ -127,7 +127,6 @@ $(document).ready(function() {
                 color: "rgb(113, 113, 113)"
             });
             $(".side").css({
-                backgroundColor: "rgba(187, 187, 187, 0.0)"
             });
             $(".side ul.main-menu li a").mouseover(function() {
                 $(this).css({
@@ -194,7 +193,6 @@ $(document).ready(function() {
                     color: "rgb(113, 113, 113)"
                 });
                 $(".side").css({
-                    backgroundColor: "rgba(187, 187, 187, 0.0)"
                 });
                 $(".side ul.main-menu li a").mouseover(function() {
                     $(this).css({
@@ -302,7 +300,6 @@ $(document).ready(function() {
                         });
                         $(".side-wrap-top").css({});
                         $(".side").css({
-                            backgroundColor: "rgba(144, 144, 144, 0)"
                         });
                         toggle++
                     }
