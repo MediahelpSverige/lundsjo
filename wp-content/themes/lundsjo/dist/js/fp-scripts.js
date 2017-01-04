@@ -328,7 +328,7 @@ function displayGrid(current_slide, slides, grid) {
 
     if(document.querySelector('.parallax-mirror') == null){
         element = $('.parallax-window');
-        elementNum = 10;
+        elementNum = 25;
     }else{
         element = $('.parallax-mirror');
     }
