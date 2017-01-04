@@ -26,6 +26,109 @@ if(function_exists('register_nav_menus')){
 
 }
 
+function mytheme_customize_register( $wp_customize ) {
+   //All our sections, settings, and controls will be added here
+
+
+
+
+//ADD OPTIONS SECTION TO ANPASSA PAGE 
+
+$wp_customize->add_section( 'mytheme_new_section_name' , array(
+    'title'      => __( 'Visible Section Name', 'mytheme' ),
+    'priority'   => 30,
+    'capability' => 'edit_theme_options', //Capability needed to tweak
+    'description' => __('Allows you to customize some example settings for MyTheme.', 'mytheme'), 
+
+) );
+
+
+
+$wp_customize->add_setting( 'backgroundColor' , array(
+    'default'     => '#000000',
+    'transport'   => 'postMessage',
+    'type' => 'theme_mod',
+    'capability' => 'edit_theme_options',
+) );
+
+
+
+   
+
+
+       $wp_customize->add_control( new WP_Customize_Color_Control( //Instantiate the color control class
+         $wp_customize, //Pass the $wp_customize object (required)
+         'mytheme_back', //Set a unique ID for the control
+         array(
+            'label' => __( 'Färg för bakgrund', 'mytheme' ), //Admin-visible name of the control
+            'section' => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
+            'settings' => 'backgroundColor', //Which setting to load and manipulate (serialized is okay)
+            'priority' => 10, //Determines the order this control appears in for the specified section
+         ) 
+      ) );
+
+      
+
+
+
+
+      $wp_customize->get_setting( 'backgroundColor' )->transport = 'postMessage';
+   }
+
+
+/*
+$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+	'label'        => __( 'Header Color', 'mytheme' ),
+	'section'    => 'your_section_id',
+	'settings'   => 'your_setting_id',
+) ) );
+*/
+
+/**
+ * Used by hook: 'customize_preview_init'
+ * 
+ * @see add_action('customize_preview_init',$func)
+ */
+function mytheme_customizer_live_preview()
+{
+
+	wp_enqueue_script( 
+		  'mytheme-themecustomizer',			//Give the script an ID
+		  get_template_directory_uri().'/js/theme-customizer.js',//Point to file
+		  array( 'jquery','customize-preview' ),	//Define dependencies
+		  '',						//Define a version (optional) 
+		  false						//Put script in footer?
+	);
+}
+
+
+
+function mytheme_customize_css()
+{
+    ?>
+         <style type="text/css">
+
+         body{
+         	background-color: <?php echo get_theme_mod('backgroundColor', '000000'); ?>;
+         }
+
+         	
+         </style>
+    <?php
+}
+
+
+
+
+add_action( 'customize_register', 'mytheme_customize_register' );
+
+
+add_action( 'wp_head', 'mytheme_customize_css');
+
+add_action( 'customize_preview_init', 'mytheme_customizer_live_preview' );
+
+
+
 
 function enqueue_jquery() {
 
