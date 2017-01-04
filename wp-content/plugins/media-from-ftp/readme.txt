@@ -4,7 +4,7 @@ Donate link: http://pledgie.com/campaigns/28307
 Tags: admin, attachment, attachments, ftp, gallery, image preview, image upload, images, import, importer, media, media library, schedule, sync, synchronize, upload, uploader
 Requires at least: 3.6.0
 Tested up to: 4.7
-Stable tag: 9.43
+Stable tag: 9.57
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,7 @@ Register to media library from files that have been uploaded by FTP.
 * The execution of the command line is supported.(mediafromftpcmd.php)
 * Export the log to a CSV file.
 * To Import the files to Media Library from a WordPress export file.
+* You can register a large number of files without timeout work with Ajax.
 
 = Why I made this? =
 * In the media uploader, you may not be able to upload by the environment of server. That's when the files are large. You do not mind the size of the file if FTP.
@@ -44,7 +45,7 @@ Register to media library from files that have been uploaded by FTP.
 * If you want to add the mime type that can be used in the media library to each file type, Please use the <a href="http://wordpress.org/plugins/mime-types-plus/">Mime Types Plus</a>.
 
 = I will not find a file with name like this: a-b-0x0.jpg. =
-* Media from FTP Settings -> Settings -> Search method for the exclusion of the thumbnail
+* Media from FTP Search & Register -> Screen Options -> Search method for the exclusion of the thumbnail
 * Check of "Unusual selection. if you want to search for filename that contains such -0x0. It is low speed."
 
 = Where is it better to upload files? =
@@ -53,11 +54,11 @@ Register to media library from files that have been uploaded by FTP.
 * Multisite wp-content/uploads/sites/*
 
 = I want to register file for any folder. =
-* Media from FTP Settings -> Settings -> Date.
+* Media from FTP Settings -> Register -> Date.
 * Uncheck of "Organize my uploads into month- and year-based folders".
 
 = I want to register file to "month- and year-based folders" without relevant to the timestamp of the file. =
-* Media from FTP Settings -> Settings -> Date.
+* Media from FTP Settings -> Register -> Date.
 * Uncheck of "Organize my uploads into month- and year-based folders".
 
 = File at the time of registration is moved to another directory. =
@@ -76,40 +77,40 @@ Register to media library from files that have been uploaded by FTP.
 * Meaning 03193845 -> 3rd 19h38m45s
 
 = 'Fatal error: Maximum execution time of ** seconds exceeded.' get an error message. =
-* Media from FTP Settings -> Settings -> Execution time
+* Media from FTP Settings -> Other -> Execution time
 * Please increasing the number of seconds.
 
 = 'Fatal error: Call to undefined function getopt()' get an error message in Windows Server. =
 * Media from FTP uses the [getopt](http://php.net/manual/en/function.getopt.php). In the case of Windows, please use the PHP5.3.0 higher versions.
 
 = I want to change the date at the time of registration. =
-* Media from FTP Settings -> Settings -> Date -> Get the date/time of the file, and updated based on it. Change it if necessary.
+* Media from FTP Settings -> Register -> Date -> Get the date/time of the file, and updated based on it. Change it if necessary.
 * Please checked.
 
 = I want to register at the date of the Exif information. =
-* Media from FTP Settings -> Settings -> Date -> Get the date/time of the file, and updated based on it. Change it if necessary.Get by priority if there is date and time of the Exif information. 
+* Media from FTP Settings -> Register -> Date -> Get the date/time of the file, and updated based on it. Change it if necessary.Get by priority if there is date and time of the Exif information. 
 * Please checked.
 
 = I want to register the Exif information in the caption of the media library. =
-* Media from FTP Settings -> Settings -> Exif Caption
+* Media from FTP Settings -> Register -> Exif Caption
 
 = In Exif Caption, I want to change the display order of the Exif. =
 * Please swapping the order of the Exif Tags. Please save your settings.
 
 = I would like to hide the files do not need to search & registration screen. =
-* Media from FTP Settings -> Settings -> Exclude file
+* Media from FTP Search & Register -> Screen Options -> Exclude file
 * Please enter the exclusion file. It can be a regular expression.
 
 = Periodically, I would like to register. =
 * There is a schedule function.
-* Media from FTP Settings -> Settings -> Schedule
+* Media from FTP Settings -> Register -> Schedule
 
 = I want to limit the number of registered every once in a schedule. =
-* Media from FTP Search & Register -> Number of items per page:
+* Media from FTP Search & Register -> Screen Options -> Number of items per page:
 * Enter a numeric value.
-* Media from FTP Settings -> Settings -> Schedule -> Apply Schedule
+* Media from FTP Settings -> Register -> Schedule -> Apply Schedule
 * Please checked.
-* Media from FTP Settings -> Settings -> Schedule -> Apply limit number of update files.
+* Media from FTP Settings -> Register -> Schedule -> Apply limit number of update files.
 * Please checked.
 
 = I would like to apply a more finely schedule. =
@@ -131,13 +132,45 @@ Register to media library from files that have been uploaded by FTP.
 
 == Screenshots ==
 
-1. Settings1
-2. Settings2
-3. Search file display
-4. Registration file selection
-5. File registration result
+1. Search file display
+2. Settings Screen Options
+3. Settings Register
+4. Settings Other
+5. Registration file selection
+6. File registration result
+7. Log screen
+8. Import File Load
+9. Import result
 
 == Changelog ==
+
+= 9.57 =
+Fixed problem of Log.
+Fixed problem of exif data insert to caption.
+
+= 9.56 =
+Fixed problem of Error in some search string of filter.
+
+= 9.55 =
+Add wp_nonce_field for Ajax.
+
+= 9.54 =
+Add wp_nonce_field.
+Changed some messages.
+
+= 9.53 =
+Fixed problem of search filter save.
+Add Help Tab.
+
+= 9.52 =
+Add Screen Option items.
+Segmentation of Settings items.
+
+= 9.51 =
+Add Screen Option for number of pages.
+
+= 9.50 =
+Adopted WP_List_Table for search page.
 
 = 9.43 =
 Add author assignment to import.
@@ -185,6 +218,14 @@ Change mediafromftpcmd.php.
 
 == Upgrade Notice ==
 
+= 9.57 =
+= 9.56 =
+= 9.55 =
+= 9.54 =
+= 9.53 =
+= 9.52 =
+= 9.51 =
+= 9.50 =
 = 9.43 =
 = 9.42 =
 = 9.41 =

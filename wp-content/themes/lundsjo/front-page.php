@@ -25,7 +25,7 @@ get_header();
 
 
 <div class="parallax-window" data-iosFix="true" androidFix="true" data-parallax="scroll" data-natural-height="1941" data-natural-width="3000" data-image-src="<?php the_post_thumbnail_url('full'); ?>">
-			<a href="#Portfolio"><i class="fa fa-angle-down"></i></a>
+			<!--<a href="#Portfolio"><i class="fa fa-angle-down"></i></a>-->
 		</div>
 	</div>
 		<div class="side col-lg-2 col-md-2">
@@ -43,7 +43,7 @@ get_header();
 </div>
 </div>
 
-
+<!--
 <div id="Om" class="hur-section section fp-auto-height fp-section">
 <div class="row">
 	<div class="col-md-2 col-lg-2"></div>
@@ -64,7 +64,7 @@ get_header();
 		</div>
 	</div>
 </div>
-</div>
+</div>-->
 
 
 <?php get_footer(); ?>

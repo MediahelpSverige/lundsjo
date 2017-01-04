@@ -27,38 +27,72 @@ class MediaFromFtpRegist {
 	 */
 	function log_settings(){
 
-	    $mediafromftp_log_db_version = '1.0';
+	    $mediafromftp_log_db_version = '2.0';
 		$installed_ver = get_option( 'mediafromftp_log_version' );
 
 		if( $installed_ver != $mediafromftp_log_db_version ) {
 			global $wpdb;
 			$log_name = $wpdb->prefix.'mediafromftp_log';
-
-			// << version 9.19
-			$sql = "CREATE TABLE " . $log_name . " (
-			meta_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-			id bigint(20),
-			user text,
-			title text,
-			permalink text,
-			url text,
-			filename text,
-			time datetime,
-			filetype text,
-			filesize text,
-			exif text,
-			length text,
-			thumbnail1 text,
-			thumbnail2 text,
-			thumbnail3 text,
-			thumbnail4 text,
-			thumbnail5 text,
-			thumbnail6 text,
-			UNIQUE KEY meta_id (meta_id)
-			)
-			CHARACTER SET 'utf8';";
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-			dbDelta($sql);
+
+			$records = $wpdb->get_results("SELECT * FROM $log_name");
+			if ( $records ) { // db_version 1.0
+				$wpdb->query("DELETE FROM $log_name");
+				$wpdb->query("ALTER TABLE $log_name DROP thumbnail1, DROP thumbnail2, DROP thumbnail3, DROP thumbnail4, DROP thumbnail5, DROP thumbnail6");
+				$wpdb->query("ALTER TABLE $log_name ADD thumbnail longtext");
+
+				foreach ( $records as $record ) {
+					$thumbnail = NULL;
+					$thumbnails = array();
+					if ( !empty($record->thumbnail1) ) { $thumbnails[0] = $record->thumbnail1; }
+					if ( !empty($record->thumbnail2) ) { $thumbnails[1] = $record->thumbnail2; }
+					if ( !empty($record->thumbnail3) ) { $thumbnails[2] = $record->thumbnail3; }
+					if ( !empty($record->thumbnail4) ) { $thumbnails[3] = $record->thumbnail4; }
+					if ( !empty($record->thumbnail5) ) { $thumbnails[4] = $record->thumbnail5; }
+					if ( !empty($record->thumbnail6) ) { $thumbnails[5] = $record->thumbnail6; }
+					if ( !empty($thumbnails) ) {
+						$thumbnail = json_encode($thumbnails);
+						$thumbnail = str_replace('\\', '', $thumbnail);
+					}
+
+					$log_arr = array(
+						'id' => $record->id,
+						'user' => $record->user,
+						'title' => $record->title,
+						'permalink' => $record->permalink,
+						'url' => $record->url,
+						'filename' => $record->filename,
+						'time' => $record->time,
+						'filetype' => $record->filetype,
+						'filesize' => $record->filesize,
+						'exif' => $record->exif,
+						'length' => $record->length,
+						'thumbnail' => $thumbnail
+						);
+					$wpdb->insert( $log_name, $log_arr);
+					$wpdb->show_errors();
+				}
+			} else {
+				// from version 9.57
+				$sql = "CREATE TABLE " . $log_name . " (
+				meta_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+				id bigint(20),
+				user text,
+				title text,
+				permalink text,
+				url text,
+				filename text,
+				time datetime,
+				filetype text,
+				filesize text,
+				exif text,
+				length text,
+				thumbnail longtext,
+				UNIQUE KEY meta_id (meta_id)
+				)
+				CHARACTER SET 'utf8';";
+				dbDelta($sql);
+			}
 			update_option( 'mediafromftp_log_version', $mediafromftp_log_db_version );
 		}
 
@@ -79,7 +113,6 @@ class MediaFromFtpRegist {
 		$pagemax = 20;
 		$basedir = MEDIAFROMFTP_PLUGIN_UPLOAD_PATH;
 		$searchdir = MEDIAFROMFTP_PLUGIN_UPLOAD_PATH;
-		$sort = 'asc';
 		$ext2typefilter = 'all';
 		$extfilter = 'all';
 		$search_display_metadata = TRUE;
@@ -118,9 +151,6 @@ class MediaFromFtpRegist {
 				}
 				if ( array_key_exists( "searchdir", $mediafromftp_settings ) ) {
 					$searchdir = $mediafromftp_settings['searchdir'];
-				}
-				if ( array_key_exists( "sort", $mediafromftp_settings ) ) {
-					$sort = $mediafromftp_settings['sort'];
 				}
 				if ( array_key_exists( "ext2typefilter", $mediafromftp_settings ) ) {
 					$ext2typefilter = $mediafromftp_settings['ext2typefilter'];
@@ -180,9 +210,6 @@ class MediaFromFtpRegist {
 			if ( array_key_exists( "searchdir", $mediafromftp_settings ) ) {
 				$searchdir = $mediafromftp_settings['searchdir'];
 			}
-			if ( array_key_exists( "sort", $mediafromftp_settings ) ) {
-				$sort = $mediafromftp_settings['sort'];
-			}
 			if ( array_key_exists( "ext2typefilter", $mediafromftp_settings ) ) {
 				$ext2typefilter = $mediafromftp_settings['ext2typefilter'];
 			}
@@ -234,7 +261,6 @@ class MediaFromFtpRegist {
 							'pagemax' => $pagemax,
 							'basedir' => $basedir,
 							'searchdir' => $searchdir,
-							'sort' => $sort,
 							'ext2typefilter' => $ext2typefilter,
 							'extfilter' => $extfilter,
 							'search_display_metadata' => $search_display_metadata,

@@ -262,17 +262,10 @@ class MediaFromFtpCron {
 						$output_text .= "\n";
 					} else {
 						// OutputMetaData
-						list($imagethumburls, $mimetype, $length, $stamptime, $file_size) = $mediafromftp->output_metadata($ext, $attach_id, $metadata, $mediafromftp_settings['character_code']);
+						list($imagethumburls, $mimetype, $length, $stamptime, $file_size, $exif_text) = $mediafromftp->output_metadata($ext, $attach_id, $metadata, $mediafromftp_settings['character_code'], $exif_text_tag);
 						$new_url_attachs = explode('/', $new_url_attach);
 
-						$exif_text = NULL;
-						$thumbnail = array();
-						$thumbnail[1] = NULL;
-						$thumbnail[2] = NULL;
-						$thumbnail[3] = NULL;
-						$thumbnail[4] = NULL;
-						$thumbnail[5] = NULL;
-						$thumbnail[6] = NULL;
+						$thumbnails = array();
 
 						$output_text = NULL;
 						$output_text .= __('Count').': '.$count."\n";
@@ -294,16 +287,10 @@ class MediaFromFtpCron {
 							foreach ( $imagethumburls as $thumbsize => $imagethumburl ) {
 								$output_text .= $thumbsize.': '.$imagethumburl."\n";
 								++$thumb_count;
-								$thumbnail[$thumb_count] = $imagethumburl;
+								$thumbnails[$thumb_count] = $imagethumburl;
 							}
-							if ( !empty($exif_text_tag) ) {
-								$mime_type = $mediafromftp->mime_type($ext);
-								if ( $mime_type === 'image/jpeg' || $mime_type === 'image/tiff' ) {
-									$exif_text = $mediafromftp->exifcaption($attach_id, $metadata, $exif_text_tag);
-									if ( !empty($exif_text) ) {
-										$output_text .= __('Caption').'[Exif]: '.$exif_text."\n";
-									}
-								}
+							if ( !empty($exif_text) ) {
+								$output_text .= __('Caption').'[Exif]: '.$exif_text."\n";
 							}
 						} else {
 							if ( wp_ext2type($ext) === 'video' || wp_ext2type($ext) === 'audio' ) {
@@ -313,8 +300,10 @@ class MediaFromFtpCron {
 						$output_text .= "\n";
 
 						if ( $log ) {
-							// Log
 							$user = get_userdata($mediafromftp_settings['cron']['user']);
+							$thumbnail = json_encode($thumbnails);
+							$thumbnail = str_replace('\\', '', $thumbnail);
+							// Log
 							$log_arr = array(
 								'id' => $attach_id,
 								'user' => $user->display_name,
@@ -327,12 +316,7 @@ class MediaFromFtpCron {
 								'filesize' => $file_size,
 								'exif' => $exif_text,
 								'length' => $length,
-								'thumbnail1' => $thumbnail[1],
-								'thumbnail2' => $thumbnail[2],
-								'thumbnail3' => $thumbnail[3],
-								'thumbnail4' => $thumbnail[4],
-								'thumbnail5' => $thumbnail[5],
-								'thumbnail6' => $thumbnail[6]
+								'thumbnail' => $thumbnail
 								);
 							$table_name = $wpdb->prefix.'mediafromftp_log';
 							$wpdb->insert( $table_name, $log_arr);

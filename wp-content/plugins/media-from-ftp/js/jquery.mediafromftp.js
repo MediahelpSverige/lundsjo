@@ -24,12 +24,6 @@ jQuery(function(){
 		startCollapsed: 'accordion'
 	});
 
-	/* All check for Checkbox */
-	jQuery('.mediafromftp-checkAll').on('change', function() {
-		jQuery('.' + this.id).prop('checked', this.checked);
-	});
-	jQuery('#mediafromftp-table').stacktable();
-
 	/* Spiner */
 	window.addEventListener( "load", function(){
 		jQuery("#mediafromftp-loading").delay(2000).fadeOut();
@@ -65,6 +59,7 @@ jQuery(function(){
 		var new_datetime = jQuery.grep(new_datetime, function(e){return e;});
 
 		jQuery("#mediafromftp-loading-container").empty();
+		jQuery("#screen-options-wrap").remove();
 		jQuery(".updated").remove();
 		jQuery(".error").remove();
 
@@ -78,13 +73,14 @@ jQuery(function(){
 		var error_update = "";
 
 		jQuery.each(new_url, function(i){
-			var j =i ;
+			var j = i ;
 			mediafromftp_defer = mediafromftp_defer.then(function(){
 				return jQuery.ajax({
 					type: 'POST',
-					url: MEDIAFROMFTPJS.ajax_url,
+					url: MEDIAFROMFTPUPDATE.ajax_url,
 					data: {
-						'action': 'mediafromftp_update',
+						'action': MEDIAFROMFTPUPDATE.action,
+						'nonce': MEDIAFROMFTPUPDATE.nonce,
 						'maxcount': new_url.length,
 						'new_url': new_url[j],
 						'new_datetime': new_datetime[j]
@@ -100,7 +96,7 @@ jQuery(function(){
 						if ( count == new_url.length ) {
 							jQuery.ajax({
 								type: 'POST',
-								url: MEDIAFROMFTPJS.ajax_url,
+								url: MEDIAFROMFTPUPDATE.ajax_url,
 								data: {
 									'action': 'mediafromftp_message',
 									'error_count': error_count,
@@ -140,14 +136,15 @@ jQuery(function(){
 		var error_update = "";
 
 		jQuery.each(medialibraryimport_file, function(i){
-			var j =i;
+			var j = i;
 			medialibraryimport_defer = medialibraryimport_defer.then(function(){
 				return jQuery.ajax({
 					type: 'POST',
 					cache : false,
-					url: MEDIAFROMFTPJS.ajax_url,
+					url: MEDIAFROMFTPIMPORT.ajax_url,
 					data: {
-						'action': 'mediafromftp_medialibraryimport_update',
+						'action': MEDIAFROMFTPIMPORT.action,
+						'nonce': MEDIAFROMFTPIMPORT.nonce,
 						'maxcount': medialibraryimport_maxcount,
 						'file': medialibraryimport_file[j],
 						'db_array': medialibraryimport_db_array[j],
@@ -176,7 +173,7 @@ jQuery(function(){
 						if ( count == medialibraryimport_maxcount ) {
 							jQuery.ajax({
 								type: 'POST',
-								url: MEDIAFROMFTPJS.ajax_url,
+								url: MEDIAFROMFTPIMPORT.ajax_url,
 								data: {
 									'action': 'mediafromftp_medialibraryimport_message',
 									'error_count': error_count,

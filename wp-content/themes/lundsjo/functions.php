@@ -11,7 +11,7 @@ if(function_exists('register_nav_menus')){
 
 
 			'main_nav' => 'Main Navigation Menu',
-
+			'page_nav' => 'Page Navigation Menu',
 
 			'footer_nav' => 'Main Footer Menu'
 

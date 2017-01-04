@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Media from FTP
-Plugin URI: http://wordpress.org/plugins/media-from-ftp/
-Version: 9.43
+Plugin URI: https://wordpress.org/plugins/media-from-ftp/
+Version: 9.57
 Description: Register to media library from files that have been uploaded by FTP.
 Author: Katsushi Kawamori
 Author URI: http://riverforest-wp.info/
@@ -53,7 +53,7 @@ Domain Path: /languages
 	$mediafromftpregist = new MediaFromFtpRegist();
 	register_activation_hook( __FILE__, array($mediafromftpregist, 'log_settings') );
 	add_action( 'plugins_loaded', array($mediafromftpregist, 'log_settings') );
-	add_action('admin_init', array($mediafromftpregist, 'register_settings'));
+	add_action( 'admin_init', array($mediafromftpregist, 'register_settings'));
 	unset($mediafromftpregist);
 
 	require_once( MEDIAFROMFTP_PLUGIN_BASE_DIR.'/req/MediaFromFtpAdmin.php' );
@@ -62,21 +62,26 @@ Domain Path: /languages
 	add_action( 'admin_menu', array($mediafromftpadmin, 'add_pages') );
 	add_action( 'admin_enqueue_scripts', array($mediafromftpadmin, 'load_custom_wp_admin_style') );
 	add_action( 'admin_footer', array($mediafromftpadmin, 'load_custom_wp_admin_style2') );
+	add_action( 'screen_settings', array($mediafromftpadmin, 'search_register_show_screen_options'), 10, 2 );
+	add_filter( 'set-screen-option', array($mediafromftpadmin, 'search_register_set_screen_options'), 11, 3 );
+	add_filter( 'contextual_help', array($mediafromftpadmin, 'search_register_help_tab'), 12, 3);
 	unset($mediafromftpadmin);
 
 	require_once( MEDIAFROMFTP_PLUGIN_BASE_DIR.'/req/MediaFromFtpCron.php' );
 	$mediafromftpcron = new MediaFromFtpCron();
-	add_action('MediaFromFtpCronHook', array($mediafromftpcron, 'CronDo') );
+	add_action( 'MediaFromFtpCronHook', array($mediafromftpcron, 'CronDo') );
 	register_activation_hook( __FILE__, array($mediafromftpcron, 'CronAllStart') );
 	register_deactivation_hook( __FILE__, array($mediafromftpcron, 'CronAllStop') );
 	unset($mediafromftpcron);
 
 	require_once( MEDIAFROMFTP_PLUGIN_BASE_DIR.'/req/MediaFromFtpAjax.php' );
 	$mediafromftpajax = new MediaFromFtpAjax();
-	add_action('wp_ajax_mediafromftp_update', array($mediafromftpajax, 'mediafromftp_update_callback') );
-	add_action('wp_ajax_mediafromftp_message', array($mediafromftpajax, 'mediafromftp_message_callback') );
-	add_action('wp_ajax_mediafromftp_medialibraryimport_update', array($mediafromftpajax, 'mediafromftp_medialibraryimport_update_callback') );
-	add_action('wp_ajax_mediafromftp_medialibraryimport_message', array($mediafromftpajax, 'mediafromftp_medialibraryimport_message_callback') );
-	unset($mediafromftpajax);
+	$action1 = 'mediafromftp-update-ajax-action';
+	$action2 = 'mediafromftp-import-ajax-action';
+	add_action( 'wp_ajax_'.$action1, array($mediafromftpajax, 'mediafromftp_update_callback') );
+	add_action( 'wp_ajax_mediafromftp_message', array($mediafromftpajax, 'mediafromftp_message_callback') );
+	add_action( 'wp_ajax_'.$action2, array($mediafromftpajax, 'mediafromftp_medialibraryimport_update_callback') );
+	add_action( 'wp_ajax_mediafromftp_medialibraryimport_message', array($mediafromftpajax, 'mediafromftp_medialibraryimport_message_callback') );
+	unset($mediafromftpajax, $action1, $action2);
 
 ?>
