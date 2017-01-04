@@ -4,6 +4,7 @@ get_header();
 
 <div id="fullpage" class="showcase">
 	<div  class="page-wrap section">
+	<div class="grid_canvas"></div>
 		<div class="side col-sm-3 col-lg-2 col-md-2">
 			<div class="side-wrap">
 				<div class="side-wrap-top">
@@ -11,25 +12,14 @@ get_header();
 				</div>
 				<?php //wp_nav_menu(array( 'menu' => 'main_nav', 'menu_class'))?>
 				<div class="side-wrap-bottom">
-					<nav class="side-menu">
-						<div class="menu-toggle"><i class="fa fa-bars"></i></div>
-						<ul class="main-menu">
-							<li class="portfolio" data-menuanchor="Portfolio"><a class="toggle-child" href="<?php bloginfo('url'); ?>">Portfolio</a>
-						</li>
-						<li><a class="" href="<?php bloginfo('url'); ?>">Referenser</a>
-					</li>
-					<li data-menuanchor=""><a href="<?php bloginfo('url'); ?>/#Hur">Hur vi arbetar</a></li>
-					<li data-menuanchor=""><a href="<?php bloginfo('url'); ?>/#Om">Om oss</a></li>
-					<li data-menuanchor=""><a href="<?php bloginfo('url'); ?>/#Kontakt">kontakt</a></li>
-				</ul>
-
-			</nav>
+				<div class="menu-toggle"><i class="fa fa-bars"></i></div>
+				<?php wp_nav_menu( array( 'menu' => 'sidmenu', 'menu_class' => 'main-menu', 'container' => 'nav', 'container_class' => 'side-menu')); ?>
 		</div>
 	</div>
 </div>
 
 <div class="col-md-2 col-lg-2"></div>
-<div class="col-md-9 col-lg-9 col-md-offset-1 col-lg-offset-1">
+<div id="single-grid" class="col-md-9 col-lg-9">
 <div class="section-wrap">
 
 
@@ -82,7 +72,6 @@ foreach( $books as $book){ ?>
 <script>
 
 $(document).ready(function(){
-
 
 
 	var elem = document.querySelector('#showcase-grid');

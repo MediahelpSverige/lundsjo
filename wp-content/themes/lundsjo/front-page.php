@@ -43,28 +43,7 @@ get_header();
 </div>
 </div>
 
-<!--
-<div id="Om" class="hur-section section fp-auto-height fp-section">
-<div class="row">
-	<div class="col-md-2 col-lg-2"></div>
-	<div class="col-md-9 col-lg-9 col-md-offset-1 col-lg-offset-1">
-		<div class="section-wrap">
-		<?php the_field('hur_vi_arbetar'); ?>
 
-		</div>
-
-		<div class="section-wrap">
-		<?php the_field('om_oss'); ?>
-
-		</div>
-
-		<div class="section-wrap" id="Kontakt">
-		<?php the_field('kontakt'); ?>
-
-		</div>
-	</div>
-</div>
-</div>-->
 
 
 <?php get_footer(); ?>

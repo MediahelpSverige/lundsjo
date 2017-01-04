@@ -7,6 +7,7 @@ $(document).ready(function() {
 
     $(".sub-menu li a").on("click", function(event) {
         event.preventDefault();
+        displayGrid()
         
     });
 
@@ -38,14 +39,19 @@ $(document).ready(function() {
 
     var paraClicked = false;
 
-    var gridTimer = setTimeout(function(){ displayGrid(current_slide, slides, startingslide, startingSrc); }, 3000);
+
+    if($('body').hasClass('home')){
+
+
+
+    var gridTimer = setTimeout(function(){ displayGrid(); }, 3000);
 
 
     $('.parallax-window').click( function(){
 
         console.log('showgrid');
 
-        displayGrid(current_slide, slides, startingslide, startingSrc);
+        displayGrid();
 
         paraClicked = true;
 
@@ -53,6 +59,8 @@ $(document).ready(function() {
 
 
     })
+
+        }
 
 
 
@@ -318,7 +326,7 @@ $(document).ready(function() {
 
 
 
-function displayGrid(current_slide, slides, grid) {
+function displayGrid() {
 
     //parallax Check, check if on mobile
 
@@ -327,13 +335,29 @@ function displayGrid(current_slide, slides, grid) {
     var elementNum = 50;
 
     if(document.querySelector('.parallax-mirror') == null){
+
+        if(document.querySelector('.parallax-window') == null){
+
+            element = $('.section-wrap');
+
+             console.log('im inside', element);
+
+        }else{
         element = $('.parallax-window');
+         console.log('element1', element);
+    }
         elementNum = 25;
+
+       
     }else{
         element = $('.parallax-mirror');
+
+        console.log('element2', element);
     }
 
-    console.log(document.querySelector('.parallax-window'));
+    console.log('element', element);
+
+
 
 
 
@@ -411,6 +435,7 @@ console.log(data);
                             url:''+WP_API_Settings.root +'/wp-json/wp/v2/categories?slug='+newText+'',
                             dataType: 'json',
                             beforeSend:function() {
+
                                 $('.project-item').removeClass('animated zoomIn');
                                 $('.project-item').addClass('animated zoomOut');
                                 $('.project-item').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -427,6 +452,13 @@ console.log(data);
 
                         ).done( function(data){
 
+                            console.log('windowWidth', window.innerWidth);
+
+                            if(window.innerWidth < 996){
+                                console.log('DONE');
+                            $('#menu-sidmeny').slideUp();
+                        }
+
                     if (text == 'allt') {
                         urlcat = ''+WP_API_Settings.root +'/wp-json/wp/v2/showcase?per_page=100';
                     }else{
@@ -442,7 +474,7 @@ console.log(data);
                             url: urlcat,
                             dataType: 'json',
                             beforeSend: function() {
-                                $(".landing_section").find(".grid_canvas").empty()
+                                $(".grid_canvas").empty()
                             },
                             success: function(data) {
 

@@ -162,6 +162,8 @@ function my_enqueue_assets() {
 
   	wp_enqueue_script( 'fp-scripts',  get_template_directory_uri() . '/src/js/fp-scripts.js', array( 'jquery' ), NULL, true);
 
+  	wp_enqueue_script( 'menu',  get_template_directory_uri() . '/src/js/menu.js', array( 'jquery' ), NULL, true);
+
     global $wp_query;
 
     wp_localize_script( 'script', 'ajaxpagination', array(

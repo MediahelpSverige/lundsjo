@@ -84,6 +84,14 @@ body .showcase .showcase-item .showcase-desc .project-text {
   width: 15%;
   max-width: 230px; }
 
+
+  ul.sub-menu {
+    position: initial !important;
+    top: 0px;
+    transition: 1s ease all;
+    /* background-color: white!important; */
+}
+
 @media (min-width: 1300px) {
   body .fp-section {
     max-width: 1200px; } }
@@ -125,12 +133,14 @@ div#referenser .section-wrap {
     position: fixed;
     width: 100%;
     max-width: initial;
-    background-color: white !important; } }
+    background-color: rgba(187, 187, 187, 0.5); } 
+
+  }
 
 @media (max-width: 1300px) {
   body .side {
     padding: 0px 5px;
-    min-width: 240px; }
+ }
   body .side .side-wrap .side-wrap-top {
     padding: 10px 5px;
     padding-bottom: 25px; }
@@ -160,9 +170,10 @@ div#referenser .section-wrap {
     position: fixed;
     width: 100%;
     max-width: initial;
-    background-color: white !important;
+    background-color: rgba(187, 187, 187, 0.5);
     width: 100%;
-    position: fixed; }
+    position: fixed;
+    }
   body .side .side-wrap .side-wrap-top {
     border: none;
     padding: 5px; }
@@ -170,13 +181,14 @@ div#referenser .section-wrap {
     display: none;
     text-align: center;
     top: 86px;
-    background-color: white;
+    background-color: rgba(187, 187, 187, 0.5);
     position: absolute;
     left: 0px;
     right: 0px;
     padding-left: 0px;
     transition: 1s all ease;
-    margin-top: 30px; }
+    margin-top: 30px;
+    }
   body .side .menu-toggle {
     display: block;
     top: 20px; }
@@ -209,7 +221,8 @@ div#referenser .section-wrap {
     height: 80px; }
   body .side .side-menu ul {
     top: 80px;
-    margin-top: 0px; }
+    margin-top: 0px;
+    }
   body .side .side-wrap .side-wrap-top {
     padding: 5px !important; }
   body .side .logo img {

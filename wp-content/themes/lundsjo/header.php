@@ -67,7 +67,7 @@
 
 </head>
 
-<body id="Hem">
+<body id="Hem" <?php body_class(); ?>>
 
 <header>
 
